@@ -2,7 +2,7 @@ package com.readthefuckingmanual.fuckukk.data.source.remote.datasource
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.readthefuckingmanual.fuckukk.data.model.UserModel
+import com.readthefuckingmanual.fuckukk.data.model.user.UserModel
 import com.readthefuckingmanual.fuckukk.data.source.remote.retrofit.RetrofitConfig
 
 object AuthRemoteDataSource {

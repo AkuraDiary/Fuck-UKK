@@ -1,6 +1,6 @@
 package com.readthefuckingmanual.fuckukk.data.source.remote.service
 
-import com.readthefuckingmanual.fuckukk.data.model.UserModel
+import com.readthefuckingmanual.fuckukk.data.model.user.UserModel
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

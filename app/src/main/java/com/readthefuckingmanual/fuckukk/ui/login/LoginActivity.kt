@@ -3,8 +3,6 @@ package com.readthefuckingmanual.fuckukk.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.readthefuckingmanual.fuckukk.R
-import com.readthefuckingmanual.fuckukk.data.model.UserModel
 import com.readthefuckingmanual.fuckukk.data.repository.AuthRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.ActivityLoginBinding
