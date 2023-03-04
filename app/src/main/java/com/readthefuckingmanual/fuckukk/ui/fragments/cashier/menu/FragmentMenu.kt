@@ -47,6 +47,23 @@ class FragmentMenu : Fragment() {
         return binding?.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        MenuRepository.getAllMenus(userToken!!).observe(viewLifecycleOwner){
+            menuMakanan = it?.values?.filter { menu -> menu?.jenis == "makanan" }
+            menuMinuman = it?.values?.filter { menu -> menu?.jenis == "minuman" }
+            rvMenuMakananAdapter?.setData(menuMakanan as List<MenuModel>)
+            rvMenuMinumanAdapter?.setData(menuMinuman as List<MenuModel>)
+
+
+        }
+        setupRvMenu()
+
+        this.binding?.tvNameMenu?.text = userPreference.getSession().username
+        setupBtnLogout()
+//        observeSelectedMenu()
+    }
+
     fun setupBtnLogout(){
         binding?.btnLogoutCashierMenu?.setOnClickListener {
             userPreference.deleteSession()
@@ -62,21 +79,7 @@ class FragmentMenu : Fragment() {
         binding = null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        MenuRepository.getAllMenus(userToken!!).observe(viewLifecycleOwner){
-            menuMakanan = it?.values?.filter { menu -> menu?.jenis == "makanan" }
-            menuMinuman = it?.values?.filter { menu -> menu?.jenis == "minuman" }
-            rvMenuMakananAdapter?.setData(menuMakanan as List<MenuModel>)
-            rvMenuMinumanAdapter?.setData(menuMinuman as List<MenuModel>)
 
-
-        }
-        setupRvMenu()
-
-        this.binding?.tvNameMenu?.text = userPreference.getSession().username
-//        observeSelectedMenu()
-    }
 
     fun setupRvMenu(){
         binding?.rvCashierMakanan?.apply {

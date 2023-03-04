@@ -23,7 +23,7 @@ object TransaksiRemoteDataSource {
     val detailAddTransaksi : MutableLiveData<DetailTransaksiModel?> = _detailAddTransaksi
 
     fun getListTransaksi(token : String){
-     RetrofitConfig.ApiService.getAllTransaksi(token)?.enqueue(
+     RetrofitConfig.ApiService.getAllTransaksi("Bearer $token")?.enqueue(
             object : Callback<ListTransaksiResponse?> {
                 override fun onResponse(
                     call: retrofit2.Call<ListTransaksiResponse?>,
@@ -41,7 +41,7 @@ object TransaksiRemoteDataSource {
     }
 
     fun getDetailTransaksi(token : String, id : Int){
-        RetrofitConfig.ApiService.getTransaksiById(token, id)?.enqueue(
+        RetrofitConfig.ApiService.getTransaksiById("Bearer $token", id)?.enqueue(
             object : Callback<DetailTransaksiModel?> {
                 override fun onResponse(
                     call: Call<DetailTransaksiModel?>,
@@ -59,7 +59,7 @@ object TransaksiRemoteDataSource {
     }
 
     fun updateTransaksi(token : String, id : Int, status : String){
-        RetrofitConfig.ApiService.updateTransaksi(token, id, status).enqueue(
+        RetrofitConfig.ApiService.updateTransaksi("Bearer $token", id, status).enqueue(
             object : Callback<DetailTransaksiModel?> {
                 override fun onResponse(
                     call: Call<DetailTransaksiModel?>,
@@ -90,7 +90,7 @@ object TransaksiRemoteDataSource {
         item10: Int?,
     ) {
         RetrofitConfig.ApiService.addTransaksi(
-            token, id_meja, nama_pelanggan, status,
+            "Bearer $token", id_meja, nama_pelanggan, status,
             item1,
             item2,
             item3,

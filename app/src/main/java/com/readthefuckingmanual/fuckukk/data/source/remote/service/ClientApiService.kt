@@ -117,17 +117,21 @@ interface ClientApiService {
     //TRANSAKSI
 
     /* get all transaksi */
+    @GET("transaksi")
     fun getAllTransaksi(
         @Header("Authorization") bearerToken : String
     ): Call<ListTransaksiResponse?>?
 
     /* get transaksi by id */
+    @GET("transaksi/{id_transaksi}")
     fun getTransaksiById(
         @Header("Authorization") bearerToken : String,
         @Path("id_transaksi") id_transaksi : Int
     ): Call<DetailTransaksiModel?>?
 
     /* add transaksi */
+    @FormUrlEncoded
+    @POST("transaksi")
     fun addTransaksi(
         @Header("Authorization") bearerToken : String,
         @Field("id_meja") id_meja : Int,
@@ -147,6 +151,8 @@ interface ClientApiService {
 
 
     /* update transaksi */
+    @FormUrlEncoded
+    @POST("transaksi/{id_transaksi}")
     fun updateTransaksi(
         @Header("Authorization") bearerToken : String,
         @Path("id_transaksi") id_transaksi : Int,
@@ -154,6 +160,8 @@ interface ClientApiService {
 
     ): Call<DetailTransaksiModel>
     /* delete transaksi */
+    @FormUrlEncoded
+    @DELETE("transaksi/{id_transaksi}")
     fun deleteTransaksi(
         @Header("Authorization") bearerToken : String,
         @Path("id_transaksi") id_transaksi : Int
