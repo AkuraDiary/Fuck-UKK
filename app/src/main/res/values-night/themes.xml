@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Kasir_Wikusama" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Kasir_Wikusama" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryVariant">@color/orange</item>
