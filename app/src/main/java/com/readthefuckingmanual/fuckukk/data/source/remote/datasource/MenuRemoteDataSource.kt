@@ -43,7 +43,7 @@ object MenuRemoteDataSource {
         )
     }
 
-    fun getMenyById(token : String, id_menu : Int) {
+    fun getMenuById(token : String, id_menu : Int) {
         RetrofitConfig.ApiService.getMenuById("Bearer + $token", id_menu)?.enqueue(
             object : Callback<MenuModel?> {
                 override fun onResponse(
