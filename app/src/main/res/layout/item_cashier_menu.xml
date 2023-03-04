@@ -58,9 +58,10 @@
                 android:layout_marginStart="12dp"
                 android:fontFamily="@font/poppins_regular"
                 android:lines="2"
-                android:text="Deskripsi Menu"
+                android:text="ASLKDJALJDOWIJDLSDJLAKSJDLKAJSDLJASIODJAOWJDLAWJDOAJWDKNAKFJHKAEJBHGHKAEJHNRLKAWJFLJAWLODFKJAW"
                 android:textColor="@color/black"
                 android:textSize="8sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddMenu"
                 app:layout_constraintStart_toEndOf="@+id/cvGambarMenu"
                 app:layout_constraintTop_toBottomOf="@+id/tvNamaMenu" />
 

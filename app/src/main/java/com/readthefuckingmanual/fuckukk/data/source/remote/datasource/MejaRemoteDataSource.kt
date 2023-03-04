@@ -13,7 +13,7 @@ object MejaRemoteDataSource {
     val mejaList : MutableLiveData<ListMejaResponse?> = _mejaList
 
     fun getListMeja(token : String){
-        RetrofitConfig.ApiService.getAllMeja(token)?.enqueue(
+        RetrofitConfig.ApiService.getAllMeja("Bearer $token")?.enqueue(
             object : Callback<ListMejaResponse?> {
                 override fun onResponse(
                     call: Call<ListMejaResponse?>,
