@@ -16,7 +16,6 @@ object TransaksiRepository {
         }
 
         fun getDetailTransaksi(token : String, id : Int) : MutableLiveData<DetailTransaksiModel?> {
-
             TransaksiRemoteDataSource.apply {
                 getDetailTransaksi(token, id)
                 return detailTransaksi
