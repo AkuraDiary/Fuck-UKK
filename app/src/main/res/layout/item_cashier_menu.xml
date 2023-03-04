@@ -31,6 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+
                     android:id="@+id/ivGambarMenu"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
@@ -53,15 +54,16 @@
 
             <TextView
                 android:id="@+id/tvDeskripsiMenu"
-                android:layout_width="250dp"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:fontFamily="@font/poppins_regular"
                 android:lines="2"
+                android:padding="4dp"
                 android:text="ASLKDJALJDOWIJDLSDJLAKSJDLKAJSDLJASIODJAOWJDLAWJDOAJWDKNAKFJHKAEJBHGHKAEJHNRLKAWJFLJAWLODFKJAW"
                 android:textColor="@color/black"
                 android:textSize="8sp"
-                app:layout_constraintEnd_toStartOf="@+id/btnAddMenu"
+
                 app:layout_constraintStart_toEndOf="@+id/cvGambarMenu"
                 app:layout_constraintTop_toBottomOf="@+id/tvNamaMenu" />
 
@@ -80,9 +82,22 @@
             <ImageView
                 android:id="@+id/btnAddMenu"
                 android:layout_width="24dp"
+                android:visibility="visible"
                 android:layout_height="24dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/ic_basket"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/btnRemoveFromKeranjang"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:visibility="gone"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_minus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

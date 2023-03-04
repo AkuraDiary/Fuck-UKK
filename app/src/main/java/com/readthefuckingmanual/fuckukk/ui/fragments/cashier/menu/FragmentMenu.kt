@@ -13,6 +13,7 @@ import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
 import com.readthefuckingmanual.fuckukk.ui.activities.login.LoginActivity
+import com.readthefuckingmanual.fuckukk.ui.activities.main.MainActivity
 
 class FragmentMenu : Fragment() {
 
@@ -49,18 +50,22 @@ class FragmentMenu : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MenuRepository.clearKeranjang()
         MenuRepository.getAllMenus(userToken!!).observe(viewLifecycleOwner){
             menuMakanan = it?.values?.filter { menu -> menu?.jenis == "makanan" }
             menuMinuman = it?.values?.filter { menu -> menu?.jenis == "minuman" }
             rvMenuMakananAdapter?.setData(menuMakanan as List<MenuModel>)
             rvMenuMinumanAdapter?.setData(menuMinuman as List<MenuModel>)
 
-
         }
+
         setupRvMenu()
 
         this.binding?.tvNameMenu?.text = userPreference.getSession().username
         setupBtnLogout()
+
+        (activity as MainActivity).observeSelectedMenu()
+
 //        observeSelectedMenu()
     }
 
@@ -92,9 +97,7 @@ class FragmentMenu : Fragment() {
         }
     }
 
-    fun observeSelectedMenu(){
-        // TODO: add selected menu into list in repository
-    }
+
     companion object {
         @JvmStatic
         fun newInstance() =
