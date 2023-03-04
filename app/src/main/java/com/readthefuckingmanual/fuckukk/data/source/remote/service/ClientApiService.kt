@@ -125,13 +125,13 @@ interface ClientApiService {
     fun getTransaksiById(
         @Header("Authorization") bearerToken : String,
         @Path("id_transaksi") id_transaksi : Int
-    ): Call<TransaksiModel?>?
+    ): Call<DetailTransaksiModel?>?
 
     /* add transaksi */
     fun addTransaksi(
         @Header("Authorization") bearerToken : String,
         @Field("id_meja") id_meja : Int,
-        @Field("nama_pelanggan") id_menu : Int,
+        @Field("nama_pelanggan") nama_pelanggan : String,
         @Field("status") status : String,
         @Field("barang1") barang1 : Int,
         @Field("barang2") barang2 : Int?,
