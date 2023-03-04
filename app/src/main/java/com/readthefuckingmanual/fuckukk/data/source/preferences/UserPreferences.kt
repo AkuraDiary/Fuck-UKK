@@ -1,4 +1,4 @@
-package com.readthefuckingmanual.fuckukk.data.repository
+package com.readthefuckingmanual.fuckukk.data.source.preferences
 
 import android.content.Context
 import com.readthefuckingmanual.fuckukk.data.model.UserModel
