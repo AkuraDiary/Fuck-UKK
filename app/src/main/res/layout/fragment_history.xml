@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvCashierText" />
 
             <ImageView
-                android:id="@+id/btnLogoutCashierStatus"
+                android:id="@+id/btnLogoutCashierHistory"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_logout"
