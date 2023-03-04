@@ -17,6 +17,8 @@ interface ClientApiService {
     ): Call<UserModel>
     //AUTH
 
+    /*NEED BEARER TOKEN AS HEADER AUTH*/
+
     //MENUS
 
     //MENUS
@@ -25,4 +27,7 @@ interface ClientApiService {
 
     //TRANSAKSI
 
+    //MEJA
+
+    //MEJA
 }
