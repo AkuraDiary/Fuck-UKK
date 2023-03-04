@@ -8,7 +8,6 @@ import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MenuRemote
 object MenuRepository {
     // implements the methods from the MenuDataSources
 
-
     fun getAllMenus(token : String) : LiveData<ListMenuResponse?> {
         MenuRemoteDataSource.apply {
             getListMenu(token)

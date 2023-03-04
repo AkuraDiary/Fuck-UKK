@@ -24,7 +24,7 @@ object MenuRemoteDataSource {
     private val _messages : MutableLiveData<BasicResponse?> = MutableLiveData()
     val messages : LiveData<BasicResponse?> = _messages
     fun getListMenu(token : String) {
-        RetrofitConfig.ApiService.getAllMenus("Bearer + $token")?.enqueue(
+        RetrofitConfig.ApiService.getAllMenus("Bearer $token")?.enqueue(
             object : Callback<ListMenuResponse?> {
                 override fun onResponse(
                     call: Call<ListMenuResponse?>,
@@ -44,7 +44,7 @@ object MenuRemoteDataSource {
     }
 
     fun getMenuById(token : String, id_menu : Int) {
-        RetrofitConfig.ApiService.getMenuById("Bearer + $token", id_menu)?.enqueue(
+        RetrofitConfig.ApiService.getMenuById("Bearer $token", id_menu)?.enqueue(
             object : Callback<MenuModel?> {
                 override fun onResponse(
                     call: Call<MenuModel?>,
@@ -64,7 +64,7 @@ object MenuRemoteDataSource {
     }
 
     fun addMenu(token : String, nama_menu : String, harga : Int, kategori : String, gambar : String?) {
-        RetrofitConfig.ApiService.addMenu("Bearer + $token", nama_menu, harga, kategori, gambar).enqueue(
+        RetrofitConfig.ApiService.addMenu("Bearer $token", nama_menu, harga, kategori, gambar).enqueue(
             object : Callback<MenuModel?> {
                 override fun onResponse(
                     call: Call<MenuModel?>,
@@ -84,7 +84,7 @@ object MenuRemoteDataSource {
     }
 
     fun deleteMenu(token : String, id_menu : Int) {
-        RetrofitConfig.ApiService.deleteMenu("Bearer + $token", id_menu).enqueue(
+        RetrofitConfig.ApiService.deleteMenu("Bearer $token", id_menu).enqueue(
             object : Callback<BasicResponse?> {
                 override fun onResponse(
                     call: Call<BasicResponse?>,
@@ -104,7 +104,7 @@ object MenuRemoteDataSource {
     }
 
     fun updateMenu(token : String, id_menu : Int, nama_menu : String, harga : Int, kategori : String, gambar : String?) {
-        RetrofitConfig.ApiService.updateMenu("Bearer + $token", id_menu, nama_menu, harga, kategori, gambar).enqueue(
+        RetrofitConfig.ApiService.updateMenu("Bearer $token", id_menu, nama_menu, harga, kategori, gambar).enqueue(
             object : Callback<BasicResponse?> {
                 override fun onResponse(
                     call: Call<BasicResponse?>,
