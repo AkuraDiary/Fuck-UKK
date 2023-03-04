@@ -2,7 +2,10 @@ package com.readthefuckingmanual.fuckukk.data.source.remote.service
 
 import com.readthefuckingmanual.fuckukk.data.model.meja.ListMejaResponse
 import com.readthefuckingmanual.fuckukk.data.model.meja.MejaModel
+import com.readthefuckingmanual.fuckukk.data.model.menu.ListMenuResponse
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
+import com.readthefuckingmanual.fuckukk.data.source.remote.BasicResponse
+import com.readthefuckingmanual.fuckukk.data.model.transaksi.DetailTransaksiModel
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.ListTransaksiResponse
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.TransaksiModel
 import com.readthefuckingmanual.fuckukk.data.model.user.UserModel
@@ -30,7 +33,7 @@ interface ClientApiService {
     @GET("menu")
     fun getAllMenus(
         @Header("Authorization") bearerToken : String
-    ): Call<List<MenuModel?>?>?
+    ): Call<ListMenuResponse?>?
 
     /* get menu by id */
     @GET("menu/{id_menu}")
@@ -47,8 +50,8 @@ interface ClientApiService {
         @Field("nama_menu") nama_menu : String,
         @Field("harga") harga : Int,
         @Field("kategori") kategori : String,
-        @Field("gambar") gambar : String
-    )//: Call<Response>
+        @Field("gambar") gambar : String?
+    ): Call<MenuModel>
 
     /* update menu */
     @FormUrlEncoded
@@ -60,14 +63,14 @@ interface ClientApiService {
         @Field("harga") harga : Int?,
         @Field("kategori") kategori : String?,
         @Field("gambar") gambar : String?
-    ): Call<Response>
+    ): Call<BasicResponse>
 
     /* delete menu */
     @DELETE("menu/{id_menu}")
     fun deleteMenu(
         @Header("Authorization") bearerToken : String,
         @Path("id_menu") id_menu : Int
-    ): Call<Response>
+    ): Call<BasicResponse>
     //MENUS
 
     //MEJA
@@ -140,7 +143,7 @@ interface ClientApiService {
         @Field("barang8") barang8 : Int?,
         @Field("barang9") barang9 : Int?,
         @Field("barang10") barang10 : Int?
-    )//: Call<Response>
+    ) : Call<DetailTransaksiModel>
 
 
     /* update transaksi */
@@ -149,7 +152,7 @@ interface ClientApiService {
         @Path("id_transaksi") id_transaksi : Int,
         @Field("status") id_meja : String,
 
-    ): Call<Response>
+    ): Call<DetailTransaksiModel>
     /* delete transaksi */
     fun deleteTransaksi(
         @Header("Authorization") bearerToken : String,
