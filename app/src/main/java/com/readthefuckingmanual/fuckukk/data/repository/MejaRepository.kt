@@ -13,7 +13,5 @@ object MejaRepository {
             getListMeja(token)
             return mejaList
         }
-
-
     }
 }
