@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
             //DO LOGIN HERE
             if (formisvalid()){
                 AuthRepository.doLogin(
-                    binding?.edtUsername?.text.toString(),
+                    binding?.edtEmail?.text.toString(),
                     binding?.edtPassword?.text.toString()
                 ).observe(this){
                     if (it != null){
@@ -45,8 +45,8 @@ class LoginActivity : AppCompatActivity() {
     fun formisvalid() : Boolean{
         when{
 
-            binding?.edtUsername?.text.isNullOrEmpty() -> {
-                binding?.edtUsername!!.error = "Username tidak boleh kosong"
+            binding?.edtEmail?.text.isNullOrEmpty() -> {
+                binding?.edtEmail!!.error = "Username tidak boleh kosong"
                 return false
             }
 

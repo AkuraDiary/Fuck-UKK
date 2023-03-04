@@ -1,7 +1,7 @@
 package com.readthefuckingmanual.fuckukk.data.source.preferences
 
 import android.content.Context
-import com.readthefuckingmanual.fuckukk.data.model.UserModel
+import com.readthefuckingmanual.fuckukk.data.model.user.UserModel
 
 class UserPreferences(mContext : Context) {
 

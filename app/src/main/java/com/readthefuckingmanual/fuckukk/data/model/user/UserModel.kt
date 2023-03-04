@@ -1,4 +1,4 @@
-package com.readthefuckingmanual.fuckukk.data.model
+package com.readthefuckingmanual.fuckukk.data.model.user
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
