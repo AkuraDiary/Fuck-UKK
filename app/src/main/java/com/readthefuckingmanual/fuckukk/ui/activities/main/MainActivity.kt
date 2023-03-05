@@ -12,8 +12,10 @@ import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE
 import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
 import androidx.lifecycle.lifecycleScope
 import com.readthefuckingmanual.fuckukk.R
+import com.readthefuckingmanual.fuckukk.data.repository.MejaRepository
 import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
+import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MejaRemoteDataSource
 import com.readthefuckingmanual.fuckukk.databinding.ActivityMainBinding
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.history.FragmentHistory
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu.FragmentMenu
@@ -24,7 +26,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private var binding : ActivityMainBinding? = null
     private val userPreferences by lazy { UserPreferences(this) }
-
+    private val userToken by lazy { userPreferences.getSession().token }
     private val menuFragment = FragmentMenu.newInstance()
     private val historyFragment = FragmentHistory.newInstance()
     private val transaksiFragment = FragmentTransaksi.newInstance()
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         setupNavigation()
+        MejaRemoteDataSource.getListMeja(userToken!!)
 
     }
 

@@ -7,11 +7,14 @@ import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MejaRemote
 
 object MejaRepository {
 
-    fun getListMeja(token : String) : MutableLiveData<ListMejaResponse?> {
-        val mejaList = MutableLiveData<ListMejaResponse?>()
-        MejaRemoteDataSource.apply {
-            getListMeja(token)
-            return mejaList
-        }
-    }
+//    private val _listMeja = MutableLiveData<ListMejaResponse?>()
+//    val listMeja get() = _listMeja
+//
+//    fun getListMeja(token : String) {
+//        val mejaList = MutableLiveData<ListMejaResponse?>()
+//        MejaRemoteDataSource.apply {
+//            getListMeja(token)
+//            _listMeja.value = mejaList.value
+//        }
+//    }
 }
