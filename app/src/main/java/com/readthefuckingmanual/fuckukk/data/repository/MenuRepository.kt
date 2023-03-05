@@ -10,20 +10,20 @@ import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MenuRemote
 object MenuRepository {
     // implements the methods from the MenuDataSources
 
-    private val _keranjang : MutableLiveData<ArrayList<MenuModel>> = MutableLiveData(ArrayList())
-    val keranjang : LiveData<ArrayList<MenuModel>> = _keranjang
+    val keranjang : MutableLiveData<ArrayList<MenuModel>> = MutableLiveData(ArrayList())
+//    val keranjang : LiveData<ArrayList<MenuModel>> = _keranjang
 
     fun addToKeranjang(menuModel: MenuModel) {
 
-        _keranjang.value?.add(menuModel)
+        keranjang.value?.add(menuModel)
 
     }
     fun clearKeranjang() {
-        _keranjang.value?.clear()
+        keranjang.value?.clear()
     }
     fun removeFromKeranjang(menuModel: MenuModel) {
 
-        _keranjang.value?.remove(menuModel)
+        keranjang.value?.remove(menuModel)
 
     }
 

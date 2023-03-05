@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierTransactionBinding
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu.ListMenuAdapter
 
-class ListItemTransactionAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>(){
+class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapter.ListItemTransactionViewHolder>(){
 
     private var transactionItemList : ArrayList<String> = arrayListOf()
 
@@ -33,20 +33,20 @@ class ListItemTransactionAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenu
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListMenuAdapter.ListMenuViewHolder {
+    ): ListItemTransactionAdapter.ListItemTransactionViewHolder {
         //TODO
-//        val viewBinding =
-//            ItemCashierTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        return ListItemTransactionViewHolder(viewBinding)
+        val viewBinding =
+            ItemCashierTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListItemTransactionViewHolder(viewBinding)
     }
 
     override fun getItemCount(): Int {
         return transactionItemList.size
     }
 
-    override fun onBindViewHolder(holder: ListMenuAdapter.ListMenuViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListItemTransactionAdapter.ListItemTransactionViewHolder, position: Int) {
         //TODO
-//        val item = transactionItemList[position]
+        val item = transactionItemList[position]
 //        holder.bind(item)
     }
 }
