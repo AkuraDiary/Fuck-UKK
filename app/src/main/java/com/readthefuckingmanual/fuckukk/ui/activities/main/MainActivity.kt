@@ -17,6 +17,7 @@ import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.ActivityMainBinding
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.history.FragmentHistory
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu.FragmentMenu
+import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.transaksi.FragmentTransaksi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private val menuFragment = FragmentMenu.newInstance()
     private val historyFragment = FragmentHistory.newInstance()
+    private val transaksiFragment = FragmentTransaksi.newInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -67,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun changeFragment(fragment: Fragment) {
+    private fun changeFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
             .setTransition(TRANSIT_FRAGMENT_CLOSE)
@@ -76,6 +78,9 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    fun moveToCheckout(){
+        changeFragment(transaksiFragment)
+    }
 //    fun observeSelectedMenu() {
 //        MenuRepository.keranjang.observe(this@MainActivity) { it ->
 //            Log.d("MainActivity", "observeSelectedMenu: ${it.size}")

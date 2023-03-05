@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.readthefuckingmanual.fuckukk.R
 
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
@@ -69,7 +71,7 @@ class FragmentMenu : Fragment() {
         this.binding?.tvNameMenu?.text = userPreference.getSession().username
         setupBtnLogout()
 
-
+        setupRvMenu()
 
     }
 
@@ -79,6 +81,12 @@ class FragmentMenu : Fragment() {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
+        }
+    }
+
+    fun setupBtnCheckout(){
+        binding?.btnCheckout?.setOnClickListener {
+            (activity as MainActivity).moveToCheckout()
         }
     }
 

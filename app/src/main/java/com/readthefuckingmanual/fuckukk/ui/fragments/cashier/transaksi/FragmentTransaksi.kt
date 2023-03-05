@@ -7,12 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.readthefuckingmanual.fuckukk.R
-import com.readthefuckingmanual.fuckukk.data.model.meja.MejaModel
 import com.readthefuckingmanual.fuckukk.data.repository.MejaRepository
+import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
+import com.readthefuckingmanual.fuckukk.databinding.FragmentTransaksiBinding
 
 class FragmentTransaksi : Fragment() {
+
+    private var selectedMejaId: Int = 0
+    private var binding : FragmentTransaksiBinding? = null
+    private var rvItemListAdapter : ListItemTransactionAdapter? = null
 
     private val userPreference by lazy {
         UserPreferences(requireContext())
@@ -23,6 +29,7 @@ class FragmentTransaksi : Fragment() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        rvItemListAdapter = ListItemTransactionAdapter()
         }
 
 
@@ -34,16 +41,28 @@ class FragmentTransaksi : Fragment() {
         return inflater.inflate(R.layout.fragment_transaksi, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupSpinner()
+        MenuRepository.keranjang.observe(viewLifecycleOwner){
+            rvItemListAdapter?.setData(it)
+        }
+        setuprvItem()
+    }
+
     fun setupSpinner(){
         MejaRepository.getListMeja(userToken!!).observe(viewLifecycleOwner) {listMeja ->
 
-            val listMejaAvailable : ArrayList<MejaModel?>? = listMeja?.values as ArrayList<MejaModel?>?
-            val adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_meja, listMeja!!.map {
-                it?.name
+            val listMejaAvailable = listMeja?.values //as ArrayList<MejaModel?>?
+            listMejaAvailable?.filter {
+                it?.available == 1
+            }
+            val adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_meja, listMejaAvailable!!.map {
+                it?.nomor_meja
             })
-            adapter.setDropDownViewResource(R.layout.item_spinner_layout)
+            adapter.setDropDownViewResource(R.layout.item_spinner_meja)
             binding?.apply {
-                .adapter = adapter
+                edtIndustriUsahaSpinner.adapter = adapter
                 edtIndustriUsahaSpinner.onItemSelectedListener = object :
                     AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
@@ -53,11 +72,11 @@ class FragmentTransaksi : Fragment() {
                         p3: Long
                     ) {
                         val selection = edtIndustriUsahaSpinner.selectedItem
-                        val selectedIdIndustry = listIndustry?.first {
-                            it?.name == selection
-                        }?.id
-                        if (selectedIdIndustry != null) {
-                            usahaIndustri = selectedIdIndustry
+                        val selecedIdMeja = listMejaAvailable?.first {
+                            it?.nomor_meja == selection
+                        }?.id_meja
+                        if (selecedIdMeja != null) {
+                            selectedMejaId = selecedIdMeja
                         }
                     }
 
@@ -70,6 +89,13 @@ class FragmentTransaksi : Fragment() {
             }
 
         }
+    }
+
+    fun setuprvItem(){
+       binding?.rvItemKeranjang.apply {
+           this?.layoutManager = LinearLayoutManager(requireContext())
+           this?.adapter = rvItemListAdapter
+       }
     }
 
     companion object {

@@ -6,14 +6,15 @@ import androidx.appcompat.view.menu.ListMenuItemView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierTransactionBinding
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu.ListMenuAdapter
 
 class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapter.ListItemTransactionViewHolder>(){
 
-    private var transactionItemList : ArrayList<String> = arrayListOf()
+    private var transactionItemList : ArrayList<MenuModel> = arrayListOf()
 
-    fun setData(data : List<String>){
+    fun setData(data : List<MenuModel>){
         transactionItemList.apply {
             clear()
             addAll(data)
@@ -21,10 +22,11 @@ class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapt
     }
 
     inner class ListItemTransactionViewHolder(private val binding : ItemCashierTransactionBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(itemListBarang :String){
+        fun bind(itemListBarang :MenuModel){
             binding.apply {
                 binding.apply{
-                    //TODO:
+                    tvTransactionNamaMenu.text = itemListBarang.nama_menu
+                    tvTransactionHargaMenu.text = "Rp ${itemListBarang.harga}"
                 }
             }
         }
