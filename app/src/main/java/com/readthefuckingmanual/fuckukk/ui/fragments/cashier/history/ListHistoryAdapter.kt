@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import android.webkit.WebHistoryItem
 import androidx.recyclerview.widget.RecyclerView
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.TransaksiModel
+import com.readthefuckingmanual.fuckukk.data.repository.TransaksiRepository
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierHistoryBinding
 
-class ListHistoryAdapter : RecyclerView.Adapter<ListHistoryAdapter.ListMenuViewHolder>() {
+class ListHistoryAdapter(private val observeSelectedHistory: (Int) -> Unit) : RecyclerView.Adapter<ListHistoryAdapter.ListMenuViewHolder>() {
 
     private var historyList: ArrayList<TransaksiModel> = arrayListOf()
 
@@ -30,6 +31,21 @@ class ListHistoryAdapter : RecyclerView.Adapter<ListHistoryAdapter.ListMenuViewH
                 tvHistoryTanggalPesanan.text = historyItem.tgl_transaksi?.replace("T", " ") ?: "".replace(".000Z", " ")
                 tvHistoryStatusPembayaran.text = "Status : " + historyItem.status
 
+                // Add click listener for the item view
+//                root.setOnClickListener {
+//                    // Call getDetailTransaksi to retrieve the transaction details
+//                    if (historyItem.status == "belum_bayar") {
+//                        TransaksiRepository.getDetailTransaksi(userToken!!, historyItem.id_transaksi!!)
+//                            .observe(viewLifecycleOwner) { detailTransaksi ->
+//                                // Show the dialog with the transaction details
+//                                showDetailTransaksiDialog(detailTransaksi)
+//                            }
+//                    } else {
+//                        // Show the dialog without calling getDetailTransaksi
+//                        showDetailTransaksiDialog(null)
+//                    }
+//                }
+
             }
         }
 
@@ -47,6 +63,9 @@ class ListHistoryAdapter : RecyclerView.Adapter<ListHistoryAdapter.ListMenuViewH
     override fun onBindViewHolder(holder: ListHistoryAdapter.ListMenuViewHolder, position: Int) {
         val item = historyList[position]
         holder.bind(item)
+        holder.itemView.setOnClickListener {
+            observeSelectedHistory(item.id_transaksi!!)
+        }
     }
 
     override fun getItemCount(): Int {

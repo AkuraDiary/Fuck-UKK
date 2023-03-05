@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_dialog_detail_transaksi_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID Transaksi" />
+
+    <TextView
+        android:id="@+id/tv_dialog_detail_transaksi_tanggal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tanggal Transaksi" />
+
+    <TextView
+        android:id="@+id/tv_dialog_detail_transaksi_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Status Transaksi" />
+
+    <TextView
+        android:id="@+id/tv_dialog_detail_transaksi_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Harga" />
+
+    <Button
+        android:id="@+id/btn_dialog_detail_transaksi_selesaikan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selesaikan Transaksi"
+        android:visibility="gone" />
+
+</LinearLayout>
