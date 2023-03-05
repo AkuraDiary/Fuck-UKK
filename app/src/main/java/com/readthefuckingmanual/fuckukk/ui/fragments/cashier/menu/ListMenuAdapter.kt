@@ -69,8 +69,6 @@ class ListMenuAdapter(
     override fun onBindViewHolder(holder: ListMenuAdapter.ListMenuViewHolder, position: Int) {
         val item = menuList[position]
         holder.bind(item)
-        // Pass a reference to the observeSelectedMenu method here
-        //holder.observeSelectedMenu = { observeSelectedMenu() }
     }
 
     override fun getItemCount(): Int {
