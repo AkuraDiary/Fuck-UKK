@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class MejaModel(
     var id_meja: Int?,
-    var nomor_meja: String?
+    var nomor_meja: String?,
+    var available : Int?
 ) : Parcelable

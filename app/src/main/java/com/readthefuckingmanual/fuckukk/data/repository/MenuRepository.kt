@@ -15,8 +15,11 @@ object MenuRepository {
 //    val keranjang : LiveData<ArrayList<MenuModel>> = _keranjang
 
     fun addToKeranjang(menuModel: MenuModel) {
-        keranjang.value?.add(menuModel)
-        Log.d("MenuRepository", "observeSelectedMenu: ${keranjang.value?.size}")
+        if (keranjang.value!!.size < 10){
+            keranjang.value?.add(menuModel)
+            Log.d("MenuRepository", "observeSelectedMenu: ${keranjang.value?.size}")
+        }
+
     }
     fun clearKeranjang() {
         keranjang.value?.clear()
