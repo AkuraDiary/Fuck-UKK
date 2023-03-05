@@ -1,12 +1,10 @@
 package com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu
 
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.ViewGroup
+import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
+import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierMenuBinding
 
@@ -29,6 +27,19 @@ class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>
                 tvDeskripsiMenu.text = menuItem.deskripsi
                 tvHargaMenu.text = menuItem.harga.toString()
                 Glide.with(ivGambarMenu).load(menuItem.path).into(ivGambarMenu)
+
+                btnAddMenu.setOnClickListener {
+                    MenuRepository.addToKeranjang(menuItem)
+                    it.visibility = View.GONE
+                    btnRemoveFromKeranjang.visibility = View.VISIBLE
+
+                }
+                btnRemoveFromKeranjang.setOnClickListener {
+                    MenuRepository.removeFromKeranjang(menuItem)
+                    it.visibility = View.GONE
+                    btnAddMenu.visibility = View.VISIBLE
+
+                }
             }
         }
     }

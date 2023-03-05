@@ -6,15 +6,14 @@ import androidx.appcompat.view.menu.ListMenuItemView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.readthefuckingmanual.fuckukk.data.model.transaksi.DetailTransaksiModel
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierTransactionBinding
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu.ListMenuAdapter
 
 class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapter.ListItemTransactionViewHolder>(){
 
-    private var transactionItemList : ArrayList<DetailTransaksiModel> = arrayListOf()
+    private var transactionItemList : ArrayList<String> = arrayListOf()
 
-    fun setData(data : List<DetailTransaksiModel>){
+    fun setData(data : List<String>){
         transactionItemList.apply {
             clear()
             addAll(data)
@@ -25,7 +24,7 @@ class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapt
         fun bind(itemListBarang :String){
             binding.apply {
                 binding.apply{
-                    //TODO
+                    //TODO:
                 }
             }
         }
@@ -35,17 +34,19 @@ class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapt
         parent: ViewGroup,
         viewType: Int
     ): ListItemTransactionAdapter.ListItemTransactionViewHolder {
+        //TODO
         val viewBinding =
             ItemCashierTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListItemTransactionViewHolder(viewBinding)
     }
 
-    override fun onBindViewHolder(holder: ListItemTransactionViewHolder, position: Int) {
-
-
-    }
-
     override fun getItemCount(): Int {
         return transactionItemList.size
+    }
+
+    override fun onBindViewHolder(holder: ListItemTransactionAdapter.ListItemTransactionViewHolder, position: Int) {
+        //TODO
+        val item = transactionItemList[position]
+//        holder.bind(item)
     }
 }

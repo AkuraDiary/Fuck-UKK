@@ -2,10 +2,12 @@ package com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
@@ -13,10 +15,13 @@ import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
 import com.readthefuckingmanual.fuckukk.ui.activities.login.LoginActivity
+import com.readthefuckingmanual.fuckukk.ui.activities.main.MainActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FragmentMenu : Fragment() {
 
-    private var binding : FragmentMenuBinding? = null
+    private var binding: FragmentMenuBinding? = null
 
     private var rvMenuMakananAdapter: ListMenuAdapter? = null
     private var rvMenuMinumanAdapter: ListMenuAdapter? = null
@@ -29,13 +34,18 @@ class FragmentMenu : Fragment() {
         userPreference.getSession().token
     }
 
-    private var menuMakanan : List<MenuModel?>? = listOf()
-    private var menuMinuman : List<MenuModel?>? = listOf()
+    private var menuMakanan: List<MenuModel?>? = listOf()
+    private var menuMinuman: List<MenuModel?>? = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rvMenuMakananAdapter = ListMenuAdapter()
-        rvMenuMinumanAdapter = ListMenuAdapter()
+        rvMenuMakananAdapter = ListMenuAdapter().apply {
+            MenuRepository.menuMakananAdapter = this
+        }
+        rvMenuMinumanAdapter = ListMenuAdapter().apply {
+            MenuRepository.menuMinumanAdapter = this
+        }
+
     }
 
     override fun onCreateView(
@@ -49,7 +59,8 @@ class FragmentMenu : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MenuRepository.getAllMenus(userToken!!).observe(viewLifecycleOwner){
+        MenuRepository.clearKeranjang()
+        MenuRepository.getAllMenus(userToken!!).observe(viewLifecycleOwner) {
             menuMakanan = it?.values?.filter { menu -> menu?.jenis == "makanan" }
             menuMinuman = it?.values?.filter { menu -> menu?.jenis == "minuman" }
             rvMenuMakananAdapter?.setData(menuMakanan as List<MenuModel>)
@@ -57,14 +68,17 @@ class FragmentMenu : Fragment() {
 
 
         }
+
         setupRvMenu()
 
         this.binding?.tvNameMenu?.text = userPreference.getSession().username
         setupBtnLogout()
-//        observeSelectedMenu()
+
+
+        observeSelectedMenu()
     }
 
-    fun setupBtnLogout(){
+    fun setupBtnLogout() {
         binding?.btnLogoutCashierMenu?.setOnClickListener {
             userPreference.deleteSession()
             val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -80,11 +94,11 @@ class FragmentMenu : Fragment() {
     }
 
 
-
-    fun setupRvMenu(){
+    fun setupRvMenu() {
         binding?.rvCashierMakanan?.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = rvMenuMakananAdapter
+
         }
         binding?.rvCashierMinuman?.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -92,9 +106,26 @@ class FragmentMenu : Fragment() {
         }
     }
 
-    fun observeSelectedMenu(){
-        // TODO: add selected menu into list in repository
+    fun observeSelectedMenu() {
+        MenuRepository.keranjang.observe(viewLifecycleOwner) { it ->
+            Log.d("FragmentMenu", "observeSelectedMenu: ${it.size}")
+            binding?.apply {
+                Log.d("FragmentMenu", "btnCheckout visibility: ${btnCheckout.visibility}")
+                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                    if (it.isNotEmpty()) {
+                        btnCheckout.visibility = View.VISIBLE
+                    } else {
+                        btnCheckout.visibility = View.GONE
+                    }
+                    btnCheckout.text = "Checkout (${it.size} Item)"
+
+                }
+
+            }
+        }
     }
+
+
     companion object {
         @JvmStatic
         fun newInstance() =
