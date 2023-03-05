@@ -137,7 +137,11 @@ class FragmentHistory : Fragment() {
                                         if (it?.status == "lunas") {
                                             btnDialogDetailTransaksiSelesaikan.visibility =
                                                 View.GONE
-                                            (activity as MainActivity).moveToHistory()
+                                            (activity as MainActivity).apply {
+                                                moveToMenuFragment()
+                                            moveToHistory()
+                                            }
+
                                         }
 
                                     }
