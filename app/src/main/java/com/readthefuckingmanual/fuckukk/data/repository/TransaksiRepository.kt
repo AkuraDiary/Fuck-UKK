@@ -30,7 +30,7 @@ object TransaksiRepository {
     }
 
     fun addTransaksi(
-        token : String, id : Int, status : String, nama_pelanggan : String,
+        token : String, id_meja : Int, status : String, nama_pelanggan : String,
         item1: Int,
         item2: Int?,
         item3: Int?,
@@ -43,7 +43,7 @@ object TransaksiRepository {
         item10: Int?,
     ) : MutableLiveData<DetailTransaksiModel?> {
         TransaksiRemoteDataSource.apply {
-            addTransaksi(token, id, nama_pelanggan, status,
+            addTransaksi(token, id_meja, nama_pelanggan, status,
                 item1,
                 item2,
                 item3,

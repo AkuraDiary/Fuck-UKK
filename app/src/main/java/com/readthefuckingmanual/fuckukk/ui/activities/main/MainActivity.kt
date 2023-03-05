@@ -84,26 +84,13 @@ class MainActivity : AppCompatActivity() {
     fun moveToCheckout(){
         changeFragment(transaksiFragment)
     }
-//    fun observeSelectedMenu() {
-//        MenuRepository.keranjang.observe(this@MainActivity) { it ->
-//            Log.d("MainActivity", "observeSelectedMenu: ${it.size}")
-//                binding?.apply {
-//                    Log.d("MainActivity", "btnCheckout visibility: ${btnCheckout.visibility}")
-////                    this@MainActivity.lifecycleScope.launch(Dispatchers.Main) {
-//                    if (it.isNotEmpty()) {
-//                        btnCheckout.visibility = View.VISIBLE
-//                    } else {
-//                        btnCheckout.visibility = View.GONE
-//                    }
-//                    btnCheckout.text = "Checkout (${it.size} Item)"
-//
-////                }
-//
-//            }
-//        }
-//    }
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    fun moveToMenuFragment() {
+        changeFragment(menuFragment)
     }
 }

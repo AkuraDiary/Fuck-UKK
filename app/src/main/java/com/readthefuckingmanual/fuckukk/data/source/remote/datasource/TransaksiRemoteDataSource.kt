@@ -1,5 +1,6 @@
 package com.readthefuckingmanual.fuckukk.data.source.remote.datasource
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.DetailTransaksiModel
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.ListTransaksiResponse
@@ -89,6 +90,7 @@ object TransaksiRemoteDataSource {
         item9: Int?,
         item10: Int?,
     ) {
+        Log.d("TAG", "addTransaksi: $nama_pelanggan")
         RetrofitConfig.ApiService.addTransaksi(
             "Bearer $token", id_meja, nama_pelanggan, status,
             item1,
