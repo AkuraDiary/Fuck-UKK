@@ -100,15 +100,13 @@ class FragmentHistory : Fragment() {
                     if (detailTransaksi?.status == "belum_bayar") {
                         btnDialogDetailTransaksiSelesaikan.visibility = View.VISIBLE
                         btnDialogDetailTransaksiSelesaikan.setOnClickListener {
-                            // handle the "selesaikan transaksi" button click
+                            //TODO handle the "selesaikan transaksi" button click
 
                         }
                     } else {
                         btnDialogDetailTransaksiSelesaikan.visibility = View.GONE
                     }
                 }
-                // Set up the rest of the dialog UI with detailTransaksi data
-                // ...
 
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
 
@@ -127,41 +125,7 @@ class FragmentHistory : Fragment() {
     }
 
 
-//    private fun showDetailDialog(historyItem: TransaksiModel) {
-//        val builder = AlertDialog.Builder(requireContext())
-//        val dialogBinding = DialogDetailTransaksiBinding.inflate(layoutInflater)
-//        val dialogView = dialogBinding.root
-//        builder.setView(dialogView)
-//
-//        // populate the dialog with transaction details
-//
-//
-//
-//        dialogBinding.apply {
-//            tvDialogDetailTransaksiId.text = "Id Transaksi : " + historyItem.id_transaksi.toString()
-//            tvDialogDetailTransaksiTanggal.text = historyItem.tgl_transaksi?.replace("T", " ") ?: "".replace(".000Z", " ")
-//            tvDialogDetailTransaksiStatus.text = "Status : " + historyItem.status
-//
-//            // if the transaction status is "belum_bayar", show the "selesaikan transaksi" button
-//
-//            if (historyItem.status == "belum_bayar") {
-//                btnDialogDetailTransaksiSelesaikan.visibility = View.VISIBLE
-//                btnDialogDetailTransaksiSelesaikan.setOnClickListener {
-//                    // handle the "selesaikan transaksi" button click
-//                    TransaksiRepository.getDetailTransaksi(userToken!!, historyItem.id_transaksi!!)
-//                        .observe(viewLifecycleOwner) { detailTransaksi ->
-//                            // TODO: handle the detailTransaksi response
-//                        }
-//                }
-//            } else {
-//                btnDialogDetailTransaksiSelesaikan.visibility = View.GONE
-//            }
-//        }
-//
-//
-//
-//        builder.show()
-//    }
+
 
     fun setupBtnLogout() {
         binding?.btnLogoutCashierHistory?.setOnClickListener {
