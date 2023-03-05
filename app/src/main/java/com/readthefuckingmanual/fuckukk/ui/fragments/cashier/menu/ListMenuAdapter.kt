@@ -8,7 +8,9 @@ import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierMenuBinding
 
-class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>() {
+class ListMenuAdapter(
+    private val observeSelectedMenu: () -> Unit
+) : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>() {
 
     private var menuList:ArrayList<MenuModel> = arrayListOf()
     fun setData(data : List<MenuModel>){
@@ -19,7 +21,7 @@ class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>
         notifyDataSetChanged()
     }
 
-    inner class ListMenuViewHolder(private val binding: ItemCashierMenuBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ListMenuViewHolder(private val binding: ItemCashierMenuBinding,  private val observeSelectedMenu: () -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(menuItem: MenuModel){
 
             binding.apply{
@@ -32,13 +34,13 @@ class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>
                     MenuRepository.addToKeranjang(menuItem)
                     it.visibility = View.GONE
                     btnRemoveFromKeranjang.visibility = View.VISIBLE
-
+                    observeSelectedMenu()
                 }
                 btnRemoveFromKeranjang.setOnClickListener {
                     MenuRepository.removeFromKeranjang(menuItem)
                     it.visibility = View.GONE
                     btnAddMenu.visibility = View.VISIBLE
-
+                    observeSelectedMenu()
                 }
             }
         }
@@ -51,12 +53,14 @@ class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>
     ): ListMenuAdapter.ListMenuViewHolder {
         val viewBinding =
             ItemCashierMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListMenuViewHolder(viewBinding)
+        return ListMenuViewHolder(viewBinding, observeSelectedMenu)
     }
 
     override fun onBindViewHolder(holder: ListMenuAdapter.ListMenuViewHolder, position: Int) {
         val item = menuList[position]
         holder.bind(item)
+        // Pass a reference to the observeSelectedMenu method here
+        //holder.observeSelectedMenu = { observeSelectedMenu() }
     }
 
     override fun getItemCount(): Int {

@@ -39,12 +39,8 @@ class FragmentMenu : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rvMenuMakananAdapter = ListMenuAdapter().apply {
-            MenuRepository.menuMakananAdapter = this
-        }
-        rvMenuMinumanAdapter = ListMenuAdapter().apply {
-            MenuRepository.menuMinumanAdapter = this
-        }
+        rvMenuMakananAdapter = ListMenuAdapter { observeSelectedMenu() }
+        rvMenuMinumanAdapter = ListMenuAdapter { observeSelectedMenu() }
 
     }
 
@@ -59,14 +55,13 @@ class FragmentMenu : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeSelectedMenu()
         MenuRepository.clearKeranjang()
         MenuRepository.getAllMenus(userToken!!).observe(viewLifecycleOwner) {
             menuMakanan = it?.values?.filter { menu -> menu?.jenis == "makanan" }
             menuMinuman = it?.values?.filter { menu -> menu?.jenis == "minuman" }
             rvMenuMakananAdapter?.setData(menuMakanan as List<MenuModel>)
             rvMenuMinumanAdapter?.setData(menuMinuman as List<MenuModel>)
-
-
         }
 
         setupRvMenu()
@@ -75,7 +70,7 @@ class FragmentMenu : Fragment() {
         setupBtnLogout()
 
 
-        observeSelectedMenu()
+
     }
 
     fun setupBtnLogout() {
