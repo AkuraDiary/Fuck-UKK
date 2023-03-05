@@ -14,24 +14,17 @@ object MenuRepository {
     val keranjang : MutableLiveData<ArrayList<MenuModel>> = MutableLiveData(ArrayList())
 //    val keranjang : LiveData<ArrayList<MenuModel>> = _keranjang
 
-    var menuMakananAdapter: RecyclerView.Adapter<*>? = null
-    var menuMinumanAdapter: RecyclerView.Adapter<*>? = null
-
     fun addToKeranjang(menuModel: MenuModel) {
         keranjang.value?.add(menuModel)
-        menuMakananAdapter?.notifyDataSetChanged()
-        menuMinumanAdapter?.notifyDataSetChanged()
+        Log.d("MenuRepository", "observeSelectedMenu: ${keranjang.value?.size}")
     }
     fun clearKeranjang() {
         keranjang.value?.clear()
-        menuMakananAdapter?.notifyDataSetChanged()
-        menuMinumanAdapter?.notifyDataSetChanged()
+        Log.d("MenuRepository", "observeSelectedMenu: ${keranjang.value?.size}")
     }
     fun removeFromKeranjang(menuModel: MenuModel) {
         keranjang.value?.remove(menuModel)
-        menuMakananAdapter?.notifyDataSetChanged()
-        menuMinumanAdapter?.notifyDataSetChanged()
-
+        Log.d("MenuRepository", "observeSelectedMenu: ${keranjang.value?.size}")
     }
 
     fun getAllMenus(token : String) : LiveData<ListMenuResponse?> {
