@@ -30,18 +30,28 @@ class ListMenuAdapter(
                 tvHargaMenu.text = menuItem.harga.toString()
                 Glide.with(ivGambarMenu).load(menuItem.path).into(ivGambarMenu)
 
-                btnAddMenu.setOnClickListener {
-                    MenuRepository.addToKeranjang(menuItem)
-                    it.visibility = View.GONE
-                    btnRemoveFromKeranjang.visibility = View.VISIBLE
-                    observeSelectedMenu()
+                MenuRepository.keranjang.value?.size.let {
+                    if (it != null) {
+                        if (it < 10) {
+                            btnAddMenu.setOnClickListener {
+                                MenuRepository.addToKeranjang(menuItem)
+                                it.visibility = View.GONE
+                                btnRemoveFromKeranjang.visibility = View.VISIBLE
+                                observeSelectedMenu()
+                            }
+                            btnRemoveFromKeranjang.setOnClickListener {
+                                MenuRepository.removeFromKeranjang(menuItem)
+                                it.visibility = View.GONE
+                                btnAddMenu.visibility = View.VISIBLE
+                                observeSelectedMenu()
+                            }
+                        }else{
+                            btnAddMenu.visibility = View.GONE
+                            btnRemoveFromKeranjang.visibility = View.GONE
+                        }
+                    }
                 }
-                btnRemoveFromKeranjang.setOnClickListener {
-                    MenuRepository.removeFromKeranjang(menuItem)
-                    it.visibility = View.GONE
-                    btnAddMenu.visibility = View.VISIBLE
-                    observeSelectedMenu()
-                }
+
             }
         }
     }

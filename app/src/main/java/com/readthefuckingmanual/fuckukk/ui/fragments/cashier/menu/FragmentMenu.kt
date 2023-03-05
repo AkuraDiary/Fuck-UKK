@@ -72,6 +72,7 @@ class FragmentMenu : Fragment() {
         setupBtnLogout()
 
         setupRvMenu()
+        setupBtnCheckout()
 
     }
 
@@ -120,7 +121,7 @@ class FragmentMenu : Fragment() {
                     } else {
                         btnCheckout.visibility = View.GONE
                     }
-                    btnCheckout.text = "Checkout (${it.size} Item)"
+                    btnCheckout.text = "Checkout (${it.size}) Item"
 
                 }
 

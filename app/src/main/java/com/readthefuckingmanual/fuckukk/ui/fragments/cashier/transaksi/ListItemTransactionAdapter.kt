@@ -18,6 +18,7 @@ class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapt
         transactionItemList.apply {
             clear()
             addAll(data)
+            notifyDataSetChanged()
         }
     }
 
@@ -47,8 +48,8 @@ class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapt
     }
 
     override fun onBindViewHolder(holder: ListItemTransactionAdapter.ListItemTransactionViewHolder, position: Int) {
-        //TODO
+
         val item = transactionItemList[position]
-//        holder.bind(item)
+        holder.bind(item)
     }
 }

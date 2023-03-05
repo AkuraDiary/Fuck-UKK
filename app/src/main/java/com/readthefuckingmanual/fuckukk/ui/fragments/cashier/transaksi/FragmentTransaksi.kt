@@ -30,7 +30,8 @@ class FragmentTransaksi : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         rvItemListAdapter = ListItemTransactionAdapter()
-        }
+
+    }
 
 
     override fun onCreateView(
@@ -38,15 +39,18 @@ class FragmentTransaksi : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transaksi, container, false)
+         binding = FragmentTransaksiBinding.inflate(layoutInflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupSpinner()
+
         MenuRepository.keranjang.observe(viewLifecycleOwner){
             rvItemListAdapter?.setData(it)
         }
+
         setuprvItem()
     }
 
