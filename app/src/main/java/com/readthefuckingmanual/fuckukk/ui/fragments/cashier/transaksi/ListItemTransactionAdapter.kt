@@ -6,14 +6,15 @@ import androidx.appcompat.view.menu.ListMenuItemView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.readthefuckingmanual.fuckukk.data.model.transaksi.DetailTransaksiModel
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierTransactionBinding
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu.ListMenuAdapter
 
-class ListItemTransactionAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>(){
+class ListItemTransactionAdapter : RecyclerView.Adapter<ListItemTransactionAdapter.ListItemTransactionViewHolder>(){
 
-    private var transactionItemList : ArrayList<String> = arrayListOf()
+    private var transactionItemList : ArrayList<DetailTransaksiModel> = arrayListOf()
 
-    fun setData(data : List<String>){
+    fun setData(data : List<DetailTransaksiModel>){
         transactionItemList.apply {
             clear()
             addAll(data)
@@ -24,7 +25,7 @@ class ListItemTransactionAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenu
         fun bind(itemListBarang :String){
             binding.apply {
                 binding.apply{
-                    //TODO:
+                    //TODO
                 }
             }
         }
@@ -33,20 +34,18 @@ class ListItemTransactionAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenu
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListMenuAdapter.ListMenuViewHolder {
-        //TODO
-//        val viewBinding =
-//            ItemCashierTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        return ListItemTransactionViewHolder(viewBinding)
+    ): ListItemTransactionAdapter.ListItemTransactionViewHolder {
+        val viewBinding =
+            ItemCashierTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListItemTransactionViewHolder(viewBinding)
+    }
+
+    override fun onBindViewHolder(holder: ListItemTransactionViewHolder, position: Int) {
+
+
     }
 
     override fun getItemCount(): Int {
         return transactionItemList.size
-    }
-
-    override fun onBindViewHolder(holder: ListMenuAdapter.ListMenuViewHolder, position: Int) {
-        //TODO
-//        val item = transactionItemList[position]
-//        holder.bind(item)
     }
 }
