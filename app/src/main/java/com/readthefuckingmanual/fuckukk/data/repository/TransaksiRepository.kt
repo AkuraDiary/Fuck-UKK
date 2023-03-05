@@ -22,9 +22,41 @@ object TransaksiRepository {
             }
         }
 
-    fun updateTransaksi(token : String, id : Int, status : String) : MutableLiveData<DetailTransaksiModel?> {
+//    fun updateTransaksi(token : String, id : Int, status : String) : MutableLiveData<DetailTransaksiModel?> {
+//        TransaksiRemoteDataSource.apply {
+//            updateTransaksi(token, id, status)
+//            return detailUpdateTransaksi
+//        }
+//    }
+
+    fun updateTransaksi(
+        token : String,
+        id_transaksi : Int,
+        id_meja : Int, status : String, nama_pelanggan : String,
+        item1: Int,
+        item2: Int?,
+        item3: Int?,
+        item4: Int?,
+        item5: Int?,
+        item6: Int?,
+        item7: Int?,
+        item8: Int?,
+        item9: Int?,
+        item10: Int?,
+    ) : MutableLiveData<DetailTransaksiModel?> {
         TransaksiRemoteDataSource.apply {
-            updateTransaksi(token, id, status)
+            updateTransaksi(token, id_transaksi, id_meja, nama_pelanggan, status,
+                item1,
+                item2,
+                item3,
+                item4,
+                item5,
+                item6,
+                item7,
+                item8,
+                item9,
+                item10
+            )
             return detailUpdateTransaksi
         }
     }

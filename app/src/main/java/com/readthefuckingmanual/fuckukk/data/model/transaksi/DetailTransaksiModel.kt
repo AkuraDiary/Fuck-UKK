@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class DetailTransaksiModel(
     var barang: List<MenuModel>?,
-    var id_meja: String?,
+    var id_meja: Int?,
     var message: String?,
     var nama_pelanggan: String?,
     var status: String?,

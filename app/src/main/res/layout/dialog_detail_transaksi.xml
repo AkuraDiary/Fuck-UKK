@@ -16,6 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tanggal Transaksi" />
+    <TextView
+        android:id="@+id/tv_dialog_detail_transaksi_nama_pelanggan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Atas Nama" />
 
     <TextView
         android:id="@+id/tv_dialog_detail_transaksi_status"

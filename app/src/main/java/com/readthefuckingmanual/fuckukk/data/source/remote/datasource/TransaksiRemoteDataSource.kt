@@ -77,6 +77,49 @@ object TransaksiRemoteDataSource {
             })
     }
 
+    fun updateTransaksi(
+        token : String, id_transaksi : Int, id_meja : Int, nama_pelanggan : String, status : String,
+        item1: Int,
+        item2: Int?,
+        item3: Int?,
+        item4: Int?,
+        item5: Int?,
+        item6: Int?,
+        item7: Int?,
+        item8: Int?,
+        item9: Int?,
+        item10: Int?,
+    ) {
+        Log.d("TAG", "addTransaksi: $nama_pelanggan")
+        RetrofitConfig.ApiService.updateTransaksi(
+            "Bearer $token", id_transaksi, id_meja, nama_pelanggan, status,
+            item1,
+            item2,
+            item3,
+            item4,
+            item5,
+            item6,
+            item7,
+            item8,
+            item9,
+            item10
+        ).enqueue(
+            object : Callback<DetailTransaksiModel?> {
+                override fun onResponse(
+                    call: Call<DetailTransaksiModel?>,
+                    response: retrofit2.Response<DetailTransaksiModel?>
+                ) {
+                    if (response.isSuccessful){
+                        _detailUpdateTransaksi.value = response.body()
+                    }
+                }
+
+                override fun onFailure(call: Call<DetailTransaksiModel?>, t: Throwable) {
+                    _detailUpdateTransaksi.postValue(null)
+                }
+            })
+    }
+
     fun addTransaksi(
         token : String, id_meja : Int, nama_pelanggan : String, status : String,
         item1: Int,

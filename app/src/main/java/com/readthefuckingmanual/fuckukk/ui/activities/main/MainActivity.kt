@@ -93,4 +93,8 @@ class MainActivity : AppCompatActivity() {
     fun moveToMenuFragment() {
         changeFragment(menuFragment)
     }
+
+    fun moveToHistory() {
+        changeFragment(historyFragment)
+    }
 }

@@ -149,6 +149,26 @@ interface ClientApiService {
         @Field("barang10") barang10 : Int?
     ) : Call<DetailTransaksiModel>
 
+    /* add transaksi */
+    @FormUrlEncoded
+    @PUT("transaksi/{id_transaksi}")
+    fun updateTransaksi(
+        @Header("Authorization") bearerToken : String,
+        @Path("id_transaksi") id_transaksi : Int,
+        @Field("id_meja") id_meja : Int,
+        @Field("nama_pelanggan") nama_pelanggan : String,
+        @Field("status") status : String,
+        @Field("barang1") barang1 : Int,
+        @Field("barang2") barang2 : Int?,
+        @Field("barang3") barang3 : Int?,
+        @Field("barang4") barang4: Int?,
+        @Field("barang5") barang5 : Int?,
+        @Field("barang6") barang6 : Int?,
+        @Field("barang7") barang7 : Int?,
+        @Field("barang8") barang8 : Int?,
+        @Field("barang9") barang9 : Int?,
+        @Field("barang10") barang10 : Int?
+    ) : Call<DetailTransaksiModel>
 
     /* update transaksi */
     @FormUrlEncoded
