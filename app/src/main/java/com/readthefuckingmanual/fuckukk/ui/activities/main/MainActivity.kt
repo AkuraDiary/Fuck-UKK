@@ -29,10 +29,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding?.root)
 
         setupNavigation()
     }
+
 
 //    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
 //        observeSelectedMenu()
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 when (menu.itemId) {
                     R.id.nav_menu -> {
                         changeFragment(menuFragment)
-                        observeSelectedMenu()
+
 //                    binding?.tvJudul?.text = "Jadwal Piala Dunia"
                         return@setOnItemSelectedListener true
                     }
@@ -60,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 false
             }
             changeFragment(menuFragment)
-            observeSelectedMenu()
+
         }
     }
 
@@ -73,24 +75,24 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun observeSelectedMenu() {
-        MenuRepository.keranjang.observe(this@MainActivity) { it ->
-            Log.d("MainActivity", "observeSelectedMenu: ${it.size}")
-                binding?.apply {
-                    Log.d("MainActivity", "btnCheckout visibility: ${btnCheckout.visibility}")
-//                    this@MainActivity.lifecycleScope.launch(Dispatchers.Main) {
-                    if (it.isNotEmpty()) {
-                        btnCheckout.visibility = View.VISIBLE
-                    } else {
-                        btnCheckout.visibility = View.GONE
-                    }
-                    btnCheckout.text = "Checkout (${it.size} Item)"
-
-//                }
-
-            }
-        }
-    }
+//    fun observeSelectedMenu() {
+//        MenuRepository.keranjang.observe(this@MainActivity) { it ->
+//            Log.d("MainActivity", "observeSelectedMenu: ${it.size}")
+//                binding?.apply {
+//                    Log.d("MainActivity", "btnCheckout visibility: ${btnCheckout.visibility}")
+////                    this@MainActivity.lifecycleScope.launch(Dispatchers.Main) {
+//                    if (it.isNotEmpty()) {
+//                        btnCheckout.visibility = View.VISIBLE
+//                    } else {
+//                        btnCheckout.visibility = View.GONE
+//                    }
+//                    btnCheckout.text = "Checkout (${it.size} Item)"
+//
+////                }
+//
+//            }
+//        }
+//    }
     override fun onDestroy() {
         super.onDestroy()
         binding = null

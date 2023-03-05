@@ -32,11 +32,13 @@ class ListMenuAdapter : RecyclerView.Adapter<ListMenuAdapter.ListMenuViewHolder>
                     MenuRepository.addToKeranjang(menuItem)
                     it.visibility = View.GONE
                     btnRemoveFromKeranjang.visibility = View.VISIBLE
+
                 }
                 btnRemoveFromKeranjang.setOnClickListener {
                     MenuRepository.removeFromKeranjang(menuItem)
                     it.visibility = View.GONE
                     btnAddMenu.visibility = View.VISIBLE
+
                 }
             }
         }
