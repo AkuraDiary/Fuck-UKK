@@ -26,9 +26,10 @@ class ListHistoryAdapter : RecyclerView.Adapter<ListHistoryAdapter.ListMenuViewH
         fun bind(historyItem: TransaksiModel){
 
             binding.apply {
-                tvHistoryIdPesanan.text = historyItem.id_transaksi.toString()
-                tvHistoryTanggalPesanan.text = historyItem.tgl_transaksi
-                tvHistoryStatusPembayaran.text = historyItem.status
+                tvHistoryIdPesanan.text = "Id Transaksi : " + historyItem.id_transaksi.toString()
+                tvHistoryTanggalPesanan.text = historyItem.tgl_transaksi?.replace("T", " ") ?: "".replace(".000Z", " ")
+                tvHistoryStatusPembayaran.text = "Status : " + historyItem.status
+
             }
         }
 

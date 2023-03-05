@@ -84,10 +84,12 @@ class FragmentTransaksi : Fragment() {
     fun setupSpinner(){
 //        var listMejaAvailable: List<MejaModel?>? = listOf()
         MejaRemoteDataSource.mejaList.observe(viewLifecycleOwner) {listMeja ->
-            val listMejaAvailable = listMeja?.values
-            listMejaAvailable?.filter {
+            val listMejaAvailable = listMeja?.values?.filter {
                 it?.available == 1
             }
+//            listMejaAvailable?.filter {
+//                it?.available == 1
+//            }
             val adapter = ArrayAdapter(requireContext(), R.layout.item_spinner_meja, listMejaAvailable!!.map {
                 it?.nomor_meja
             })
@@ -185,6 +187,7 @@ class FragmentTransaksi : Fragment() {
 
                         Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
                         MenuRepository.keranjang.value?.clear()
+                        MejaRemoteDataSource.getListMeja(userToken!!)
                         (activity as MainActivity).moveToMenuFragment()
                     }
 
