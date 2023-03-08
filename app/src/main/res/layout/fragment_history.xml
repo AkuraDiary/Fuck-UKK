@@ -39,6 +39,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCashierText" />
 
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchCashierStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belum Bayar  "
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLogoutCashierHistory" />
             <ImageView
                 android:id="@+id/btnLogoutCashierHistory"
                 android:layout_width="32dp"

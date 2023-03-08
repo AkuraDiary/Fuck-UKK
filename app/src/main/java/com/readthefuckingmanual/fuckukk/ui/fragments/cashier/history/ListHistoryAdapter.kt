@@ -2,20 +2,18 @@ package com.readthefuckingmanual.fuckukk.ui.fragments.cashier.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.webkit.WebHistoryItem
 import androidx.recyclerview.widget.RecyclerView
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.TransaksiModel
-import com.readthefuckingmanual.fuckukk.data.repository.TransaksiRepository
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierHistoryBinding
 
 class ListHistoryAdapter(private val observeSelectedHistory: (Int) -> Unit) : RecyclerView.Adapter<ListHistoryAdapter.ListMenuViewHolder>() {
 
     private var historyList: ArrayList<TransaksiModel> = arrayListOf()
 
-    fun setData(data: List<TransaksiModel>){
+    fun setData(data: List<TransaksiModel?>?){
         historyList.apply {
             clear()
-            addAll(data)
+            addAll(data as Collection<TransaksiModel>)
             notifyDataSetChanged()
         }
     }
