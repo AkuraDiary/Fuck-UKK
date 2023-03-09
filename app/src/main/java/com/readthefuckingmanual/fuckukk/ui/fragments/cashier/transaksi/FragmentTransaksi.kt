@@ -61,11 +61,13 @@ class FragmentTransaksi : Fragment() {
 
         MenuRepository.keranjang.observe(viewLifecycleOwner){
             rvItemListAdapter?.setData(it)
+            totalharga = 0 // mulai dari 0 yaa
             for (i in it){
                 totalharga += i.harga!!
             }
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
                 binding?.apply {
+
                     tvTotal.text = "Rp. $totalharga"
 
                 }

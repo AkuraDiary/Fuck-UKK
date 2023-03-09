@@ -115,10 +115,15 @@ class FragmentHistory : Fragment() {
                         tvDialogDetailTransaksiId.text =
                             "ID Meja : " + detailTransaksi?.id_meja.toString()
                         tvDialogDetailTransaksiTanggal.text = "Tanggal : "
-                        detailTransaksi?.tgl_transaksi?.replace("T", " ") ?: "".replace(
-                            ".000Z",
-                            " "
-                        )
+                        detailTransaksi.tgl_transaksi?.replace("T", " ")
+
+                        rvListItemTransaksi.apply {
+                            layoutManager = LinearLayoutManager(requireContext())
+                            adapter = ListItemTransaksiDetailAdapter().apply {
+                                setData(detailTransaksi.barang)
+                            }
+                        }
+
                         tvDialogDetailTransaksiStatus.text = "Status : " + detailTransaksi?.status
 
                         tvDialogDetailTransaksiTotal.text =
@@ -175,7 +180,6 @@ class FragmentHistory : Fragment() {
                             btnDialogDetailTransaksiSelesaikan.visibility = View.GONE
                         }
                     }
-
 
                     dialog.setView(dialogBinding.root)
                         .create()
