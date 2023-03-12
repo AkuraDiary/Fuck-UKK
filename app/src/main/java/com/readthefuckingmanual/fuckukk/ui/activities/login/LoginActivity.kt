@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.readthefuckingmanual.fuckukk.data.repository.AuthRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.ActivityLoginBinding
+import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
 import com.readthefuckingmanual.fuckukk.ui.activities.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -18,7 +19,11 @@ class LoginActivity : AppCompatActivity() {
 
 //         check logged in user
         if (!(userPreferences.getSession()).token.isNullOrEmpty()){
-            moveTOMainActivity()
+            if ((userPreferences.getSession()).role.toString() == "cashier"){
+                moveTOMainActivity()
+            }else if ((userPreferences.getSession()).role== "admin"){
+                moveToAdminActivity()
+            }
         }
         setupInput()
 
@@ -34,8 +39,13 @@ class LoginActivity : AppCompatActivity() {
                     binding?.edtPassword?.text.toString()
                 ).observe(this){
                     if (it != null){
-                        userPreferences.saveSession(it)
-                        moveTOMainActivity()
+                        if (it.role.toString() == "cashier"){
+                            userPreferences.saveSession(it)
+                            moveTOMainActivity()
+                        }else if (it.role.toString() == "admin"){
+                            userPreferences.saveSession(it)
+                            moveToAdminActivity()
+                        }
                     }
                 }
             }
@@ -63,6 +73,12 @@ class LoginActivity : AppCompatActivity() {
 
     fun moveTOMainActivity(){
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun moveToAdminActivity(){
+        val intent = Intent(this@LoginActivity, AdminActivity::class.java)
         startActivity(intent)
         finish()
     }

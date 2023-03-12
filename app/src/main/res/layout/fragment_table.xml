@@ -8,8 +8,8 @@
     tools:context=".ui.fragments.admin.table.FragmentTable">
 
     <EditText
-        android:id="@+id/searchBarTable"
-        android:layout_width="match_parent"
+        android:id="@+id/searchBarTableAdmin"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/search_background"
         android:drawableStart="@drawable/ic_search"
@@ -17,21 +17,29 @@
         android:elevation="4dp"
         android:hint="Search"
         android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogoutMejaAdmin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/btnLogoutMejaAdmin"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMeja"
+        android:id="@+id/rvMejaAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         tools:listitem="@layout/item_admin_table"
-        app:layout_constraintTop_toBottomOf="@+id/searchBarTable"
+        app:layout_constraintTop_toBottomOf="@+id/searchBarTableAdmin"
         tools:layout_editor_absoluteX="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddMeja"
+        android:id="@+id/fabAddMejaAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_plus"

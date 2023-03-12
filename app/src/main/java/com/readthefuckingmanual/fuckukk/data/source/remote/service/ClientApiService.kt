@@ -8,6 +8,7 @@ import com.readthefuckingmanual.fuckukk.data.source.remote.BasicResponse
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.DetailTransaksiModel
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.ListTransaksiResponse
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.TransaksiModel
+import com.readthefuckingmanual.fuckukk.data.model.user.ListUserAdminResponse
 import com.readthefuckingmanual.fuckukk.data.model.user.UserModel
 import okhttp3.Response
 import retrofit2.Call
@@ -189,5 +190,9 @@ interface ClientApiService {
 
     //TRANSAKSI
 
-
+    //USER
+    /* Get all User*/
+    @GET("user")
+    fun getAllUser(): Call<ListUserAdminResponse?>?
+    //USER
 }
