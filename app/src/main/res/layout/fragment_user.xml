@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/search_bar"
+            android:id="@+id/searchBarUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/search_background"
@@ -31,10 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             tools:listitem="@layout/item_admin_user"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            app:layout_constraintTop_toBottomOf="@+id/searchBarUser"
             tools:layout_editor_absoluteX="16dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_plus"

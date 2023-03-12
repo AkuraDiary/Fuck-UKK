@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/ivGambarMenu"
+                    android:id="@+id/ivAdminGambarMenu"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     tools:src="@tools:sample/avatars" />
@@ -38,7 +38,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/tvNamaMenu"
+                android:id="@+id/tvAdminNamaMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -51,7 +51,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvDeskripsiMenu"
+                android:id="@+id/tvAdminDeskripsiMenu"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -61,12 +61,11 @@
                 android:text="ASLKDJALJDOWIJDLSDJLAKSJDLKAJSDLJASIODJAOWJDLAWJDOAJWDKNAKFJHKAEJBHGHKAEJHNRLKAWJFLJAWLODFKJAW"
                 android:textColor="@color/black"
                 android:textSize="8sp"
-
                 app:layout_constraintStart_toEndOf="@+id/cvGambarMenu"
-                app:layout_constraintTop_toBottomOf="@+id/tvNamaMenu" />
+                app:layout_constraintTop_toBottomOf="@+id/tvAdminNamaMenu" />
 
             <TextView
-                android:id="@+id/tvHargaMenu"
+                android:id="@+id/tvAdminHargaMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -75,18 +74,7 @@
                 android:textColor="@color/black"
                 android:text="Harga"
                 app:layout_constraintStart_toEndOf="@+id/cvGambarMenu"
-                app:layout_constraintTop_toBottomOf="@+id/tvDeskripsiMenu" />
-
-            <ImageView
-                android:id="@+id/btnRemoveFromKeranjang"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:visibility="gone"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_minus"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/tvAdminDeskripsiMenu" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
