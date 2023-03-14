@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
-import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
 import com.readthefuckingmanual.fuckukk.databinding.ItemCashierMenuBinding
 
 class ListMenuAdapter(
@@ -51,7 +50,6 @@ class ListMenuAdapter(
                         }
                     }
                 }
-
             }
         }
     }

@@ -63,7 +63,7 @@ class FragmentTransaksi : Fragment() {
             rvItemListAdapter?.setData(it)
             totalharga = 0 // mulai dari 0 yaa
             for (i in it){
-                totalharga += i.harga!!
+                totalharga += i.harga!!.toInt()
             }
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
                 binding?.apply {
@@ -133,8 +133,6 @@ class FragmentTransaksi : Fragment() {
                 }
 
             }
-
-
         }
     }
 
