@@ -58,6 +58,9 @@ class FragmentAdminMenu : Fragment() {
             }
         }
 
+        setupRvMenu()
+        setupBtnLogout()
+
     }
 
     fun setupBtnLogout() {
