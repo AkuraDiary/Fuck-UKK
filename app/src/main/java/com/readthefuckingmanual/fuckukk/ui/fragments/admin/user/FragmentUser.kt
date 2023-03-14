@@ -29,11 +29,10 @@ class FragmentUser : Fragment() {
         UserPreferences(requireContext())
     }
 
-    private var userAdmin: List<UserAdminModel?>? = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rvUserAdapter = ListUserAdapter{ observeSelectedUser() }
+        rvUserAdapter = ListUserAdapter{::observeSelectedUser }
     }
 
     override fun onCreateView(
@@ -47,9 +46,12 @@ class FragmentUser : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeSelectedUser()
+//        observeSelectedUser()
         UserRepository.getAllUser().observe(viewLifecycleOwner){
-            rvUserAdapter?.setData(userAdmin as List<UserAdminModel>)
+            if (it != null){
+                rvUserAdapter?.setData(it.values as List<UserAdminModel>)
+            }
+
         }
         setupRvUser()
         setupBtnLogout()
@@ -76,10 +78,10 @@ class FragmentUser : Fragment() {
         }
     }
 
-    fun observeSelectedUser(){
-        UserRepository.user.observe(viewLifecycleOwner){it ->
-            Log.d("FragmentUser", "observeSelectedUser: ${it.size}")
-        }
+    fun observeSelectedUser(userModel : UserAdminModel){
+        UserRepository.selecteduser.postValue(userModel)
+
+
     }
     companion object {
         @JvmStatic

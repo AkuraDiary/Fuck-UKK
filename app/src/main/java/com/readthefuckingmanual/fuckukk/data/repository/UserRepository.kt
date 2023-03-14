@@ -9,6 +9,7 @@ import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.UserRemote
 
 object UserRepository {
 
+    val selecteduser : MutableLiveData<UserAdminModel?> = MutableLiveData()
     val user : MutableLiveData<ArrayList<UserAdminModel>> = MutableLiveData(ArrayList())
     fun getAllUser() : LiveData<ListUserAdminResponse?>{
         UserRemoteDataSource.apply {

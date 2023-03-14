@@ -24,6 +24,9 @@ class ListUserAdapter(
             binding.apply {
                 tvAdminNamaUser.text = userItem.namaUser
 
+                root.setOnClickListener {
+                    observeSelectedUser()
+                }
             }
         }
     }
