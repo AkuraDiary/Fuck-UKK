@@ -5,28 +5,54 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.readthefuckingmanual.fuckukk.R
+import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
+import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MejaRemoteDataSource
+import com.readthefuckingmanual.fuckukk.databinding.FragmentCrudTableBinding
+import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
+import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentCrudTable.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentCrudTable : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
+    private var binding: FragmentCrudTableBinding? = null
+
+    private val userPreference by lazy {
+        UserPreferences(requireContext())
+    }
+
+    private val userToken by lazy {
+        userPreference.getSession().token
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeAddMeja()
+    }
+
+    private fun observeAddMeja() {
+        binding?.apply {
+            btnAddMeja.setOnClickListener {
+            if (edtMeja.text.isNotEmpty()){
+                MejaRemoteDataSource.apply {
+                    addMeja(userToken.toString(), edtMeja.text.toString())
+                    mejaResponse.observe(viewLifecycleOwner){
+                        if(it?.status == "Success"){
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                (activity as AdminActivity).moveToAdminTableFragment()
+
+                            }
+                        }
+                    }
+                }
+            }
+            }
         }
     }
 
@@ -35,26 +61,19 @@ class FragmentCrudTable : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_crud_table, container, false)
+        binding = FragmentCrudTableBinding.inflate(layoutInflater, container, false)
+        return binding?.root
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentCrudTable.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentCrudTable().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() =
+            FragmentCrudTable()
+
     }
 }

@@ -44,11 +44,11 @@ object MenuRepository {
         }
     }
 
-//    fun addMenu(token : String, menuModel: MenuModel) : LiveData<MenuModel?> {
-//        MenuRemoteDataSource.apply {
-//            addMenu(token, menuModel)
-//            return _menu
-//        }
-//    }
+    fun addMenu(token : String, menuModel: MenuModel) : LiveData<MenuModel?> {
+        MenuRemoteDataSource.apply {
+            addMenu(token, menuModel)
+            return _menu
+        }
+    }
 
 }

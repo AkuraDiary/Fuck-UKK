@@ -95,7 +95,7 @@ interface ClientApiService {
     fun addMeja(
         @Header("Authorization") bearerToken : String,
         @Field("nomor_meja") nama_meja : String,
-    )//: Call<Response>
+    ): Call<BasicResponse>
 
     /* update meja */
     @FormUrlEncoded

@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editMeja"
+            android:id="@+id/edtMeja"
             android:layout_width="365dp"
             android:layout_height="52dp"
             android:layout_marginTop="20dp"
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
-            android:id="@+id/my_button"
+            android:id="@+id/btnAddMeja"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
