@@ -25,7 +25,7 @@ class FragmentTable : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            FragmentMenu()
+            FragmentTable()
 
 
     }

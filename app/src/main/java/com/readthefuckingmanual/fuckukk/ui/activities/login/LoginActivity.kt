@@ -19,11 +19,7 @@ class LoginActivity : AppCompatActivity() {
 
 //         check logged in user
         if (!(userPreferences.getSession()).token.isNullOrEmpty()){
-            if ((userPreferences.getSession()).role.toString() == "cashier"){
-                moveTOMainActivity()
-            }else if ((userPreferences.getSession()).role== "admin"){
                 moveToAdminActivity()
-            }
         }
         setupInput()
 
@@ -39,13 +35,8 @@ class LoginActivity : AppCompatActivity() {
                     binding?.edtPassword?.text.toString()
                 ).observe(this){
                     if (it != null){
-                        if (it.role.toString() == "cashier"){
-                            userPreferences.saveSession(it)
-                            moveTOMainActivity()
-                        }else if (it.role.toString() == "admin"){
-                            userPreferences.saveSession(it)
-                            moveToAdminActivity()
-                        }
+                        userPreferences.saveSession(it)
+                        moveToAdminActivity()
                     }
                 }
             }
@@ -71,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun moveTOMainActivity(){
+    fun moveToMainActivity(){
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
         finish()

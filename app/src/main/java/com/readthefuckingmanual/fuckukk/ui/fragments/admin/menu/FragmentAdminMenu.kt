@@ -26,6 +26,6 @@ class FragmentAdminMenu : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            FragmentMenu()
+            FragmentAdminMenu()
     }
 }

@@ -14,8 +14,6 @@ import com.readthefuckingmanual.fuckukk.ui.fragments.admin.user.FragmentUser
 class AdminActivity : AppCompatActivity() {
 
     private var binding : ActivityAdminBinding? = null
-    private val userPreferences by lazy { UserPreferences(this) }
-    private val userToken by lazy { userPreferences.getSession().token }
     private val userFragment = FragmentUser.newInstance()
     private val tableFragment = FragmentTable.newInstance()
     private val menuFragment = FragmentAdminMenu.newInstance()
@@ -23,16 +21,16 @@ class AdminActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
-
         setContentView(binding?.root)
 
+        setupNavigation()
 
     }
 
     fun setupNavigation(){
         binding?.apply {
-            bottomNavigationAdmin?.setOnItemSelectedListener { menu ->
-                when (menu.itemId) {
+            bottomNavigationAdmin?.setOnItemSelectedListener { user ->
+                when (user.itemId) {
                     R.id.nav_menu_admin -> {
                         changeFragment(menuFragment)
 
@@ -61,7 +59,7 @@ class AdminActivity : AppCompatActivity() {
             .beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.homeRootView, fragment)
+            .replace(R.id.adminRootView, fragment)
             .commit()
     }
 
