@@ -111,7 +111,9 @@ object MenuRemoteDataSource {
     }
 
     fun updateMenuDataSource(token: String, id_menu: Int, nama_menu: String, jenis: String, deskripsi: String, gambar: String?, harga: String) {
-        RetrofitConfig.ApiService.updateMenu("Bearer $token", id_menu, nama_menu, jenis, deskripsi,  gambar, harga.toString()).enqueue(
+        RetrofitConfig.ApiService.updateMenu("Bearer $token", id_menu, nama_menu, jenis, deskripsi,  //gambar,
+            harga
+        ).enqueue(
             object : Callback<BasicResponse?> {
                 override fun onResponse(
                     call: Call<BasicResponse?>,

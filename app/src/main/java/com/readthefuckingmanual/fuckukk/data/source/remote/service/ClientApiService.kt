@@ -64,7 +64,7 @@ interface ClientApiService {
         @Field("nama_menu") nama_menu : String,
         @Field("jenis") jenis : String,
         @Field("deskripsi") deskripsi : String,
-        @Field("gambar") gambar : String?,
+        //@Field("gambar") gambar : String?,
         @Field("harga") harga : String
     ): Call<BasicResponse>
 
