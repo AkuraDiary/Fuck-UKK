@@ -57,7 +57,7 @@ interface ClientApiService {
 
     /* update menu */
     @FormUrlEncoded
-    @POST("menu/{id_menu}")
+    @PUT("menu/{id_menu}")
     fun updateMenu(
         @Header("Authorization") bearerToken : String,
         @Path("id_menu") id_menu : Int,
@@ -101,7 +101,7 @@ interface ClientApiService {
 
     /* update meja */
     @FormUrlEncoded
-    @POST("meja/{id_meja}")
+    @PUT("meja/{id_meja}")
     fun updateMeja(
         @Header("Authorization") bearerToken : String,
         @Path("id_meja") id_meja : Int,
