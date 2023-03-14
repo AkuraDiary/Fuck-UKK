@@ -91,4 +91,5 @@ class FragmentTable : Fragment() {
         fun newInstance() =
             FragmentTable()
     }
+
 }
