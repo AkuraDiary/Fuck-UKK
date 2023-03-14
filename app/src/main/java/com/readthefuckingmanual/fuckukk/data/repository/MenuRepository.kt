@@ -11,6 +11,7 @@ import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MenuRemote
 object MenuRepository {
     // implements the methods from the MenuDataSources
 
+
     val selectedmenu : MutableLiveData<MenuModel?> = MutableLiveData()
     val keranjang : MutableLiveData<ArrayList<MenuModel>> = MutableLiveData(ArrayList())
 //    val keranjang : LiveData<ArrayList<MenuModel>> = _keranjang
@@ -51,4 +52,11 @@ object MenuRepository {
             return _menu
         }
     }
+    fun edtMenu(token: String, menuModel: MenuModel) : LiveData<MenuModel?> {
+        MenuRemoteDataSource.apply {
+            edtMenu(token, menuModel)
+            return _menu
+        }
+    }
+
 }

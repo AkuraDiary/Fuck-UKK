@@ -49,7 +49,7 @@ interface ClientApiService {
     fun addMenu(
         @Header("Authorization") bearerToken : String,
         @Field("nama_menu") nama_menu : String,
-        @Field("harga") harga : Int,
+        @Field("harga") harga : String,
         @Field("kategori") kategori : String,
         @Field("gambar") gambar : String?
     ): Call<MenuModel>

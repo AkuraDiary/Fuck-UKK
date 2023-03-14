@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class MenuModel(
     var deskripsi: String?,
     var filename: String?,
-    var harga: Int?,
+    var harga: String,
     var id_menu: Int?,
     var jenis: String?,
     var nama_menu: String?,

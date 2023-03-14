@@ -1,27 +1,106 @@
 package com.readthefuckingmanual.fuckukk.ui.fragments.admin.menu
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.readthefuckingmanual.fuckukk.R
+import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
+import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
+import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
+import com.readthefuckingmanual.fuckukk.databinding.FragmentAdminMenuBinding
+import com.readthefuckingmanual.fuckukk.ui.activities.login.LoginActivity
+import com.readthefuckingmanual.fuckukk.ui.activities.main.MainActivity
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu.FragmentMenu
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FragmentAdminMenu : Fragment() {
 
+    private var binding: FragmentAdminMenuBinding? = null
+
+    private var rvAdminMenuAdaper: ListAdminMenuAdapter? = null
+
+    private val userPreference by lazy {
+        UserPreferences(requireContext())
+    }
+
+    private val userToken by lazy {
+        userPreference.getSession().token
+    }
+
+    private var menu: List<MenuModel?>? = listOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        rvAdminMenuAdaper = ListAdminMenuAdapter() //{ observeSelectedAdminMenu() }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_menu, container, false)
+        binding = FragmentAdminMenuBinding.inflate(layoutInflater, container, false)
+        return binding?.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        observeSelectedAdminMenu()
+        MenuRepository.getAllMenus(userToken!!).observe(viewLifecycleOwner){
+            if (it != null){
+                rvAdminMenuAdaper?.setData(it.values as List<MenuModel>)
+            }
+        }
+
+    }
+
+    fun setupBtnLogout() {
+        binding?.btnLogoutAdminMenu?.setOnClickListener {
+            userPreference.deleteSession()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+
+    fun setupRvMenu() {
+        binding?.rvMenuAdmin?.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = rvAdminMenuAdaper
+
+        }
+
+    }
+
+//    fun observeSelectedMenuAdmin() {
+//        MenuRepository..observe(viewLifecycleOwner) { it ->
+//            Log.d("FragmentMenu", "observeSelectedMenu: ${it.size}")
+//            binding?.apply {
+//                Log.d("FragmentMenu", "btnCheckout visibility: ${btnCheckout.visibility}")
+//                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+//                    if (it.isNotEmpty()) {
+//                        btnCheckout.visibility = View.VISIBLE
+//                    } else {
+//                        btnCheckout.visibility = View.GONE
+//                    }
+//                    btnCheckout.text = "Checkout (${it.size}) Item"
+//
+//                }
+//
+//            }
+//        }
+//    }
 
     companion object {
         @JvmStatic
