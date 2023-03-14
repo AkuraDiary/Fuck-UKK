@@ -97,9 +97,9 @@ class FragmentCrudMenu : Fragment() {
                     id_menu = null,
                     path = "",
                 )
-                if (isedit) {
+                if (!isedit) {
                     menuModel.id_menu?.let { menu ->
-                        MenuRepository.edtMenu(userToken!!, menuModel.id_menu!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path, menuModel.path!!).observe(viewLifecycleOwner){
+                        MenuRepository.addMenu(userToken!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path!!, menuModel.harga!!).observe(viewLifecycleOwner){
                             if (it != null){
                                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                                     Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
@@ -114,7 +114,8 @@ class FragmentCrudMenu : Fragment() {
                         id_menu = MenuRepository.selectedmenu.value?.id_menu
                         path = MenuRepository.selectedmenu.value?.path
                     }
-                    MenuRepository.edtMenu(userToken!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path!! ).observe(viewLifecycleOwner){
+                    MenuRepository.edtMenu(userToken!!,
+                        menuModel.id_menu!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path!!, menuModel.harga ).observe(viewLifecycleOwner){
                         if (it != null){
                             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                                 Toast.makeText(requireContext(), "Menu Diedit ${it?.nama_menu}", Toast.LENGTH_SHORT)

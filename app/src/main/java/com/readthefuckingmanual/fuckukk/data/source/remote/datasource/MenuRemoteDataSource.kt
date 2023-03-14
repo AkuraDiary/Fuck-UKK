@@ -1,7 +1,6 @@
 package com.readthefuckingmanual.fuckukk.data.source.remote.datasource
 
 import android.util.Log
-import android.view.Menu
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.readthefuckingmanual.fuckukk.data.model.menu.ListMenuResponse
@@ -70,8 +69,8 @@ object MenuRemoteDataSource {
         )
     }
 
-    fun addMenu(token : String, nama_menu : String, deskripsi: String, kategori : String, gambar : String?, harga : Int) {
-        RetrofitConfig.ApiService.addMenu("Bearer $token", nama_menu , kategori, deskripsi, gambar, harga.toString()).enqueue(
+    fun addMenuDataSource(token: String, nama_menu: String, deskripsi: String, kategori: String, gambar: String?, harga: String) {
+        RetrofitConfig.ApiService.addMenu("Bearer $token", nama_menu , kategori, deskripsi, gambar, harga).enqueue(
             object : Callback<MenuModel?> {
                 override fun onResponse(
                     call: Call<MenuModel?>,
@@ -110,7 +109,7 @@ object MenuRemoteDataSource {
         )
     }
 
-    fun updateMenu(token : String, id_menu : Int, nama_menu : String, jenis : String, deskripsi: String, gambar : String?, harga : Int) {
+    fun updateMenuDataSource(token: String, id_menu: Int, nama_menu: String, jenis: String, deskripsi: String, gambar: String?, harga: String) {
         RetrofitConfig.ApiService.updateMenu("Bearer $token", id_menu, nama_menu, jenis, deskripsi,  gambar, harga.toString()).enqueue(
             object : Callback<BasicResponse?> {
                 override fun onResponse(

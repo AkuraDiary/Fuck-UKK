@@ -47,13 +47,13 @@ object MenuRepository {
 
     fun addMenu(token: String, nama_menu : String, jenis : String, deskripsi : String, gambar : String?, harga : String ) : MutableLiveData<MenuModel?> {
         MenuRemoteDataSource.apply {
-            addMenu(token, nama_menu, jenis, deskripsi, gambar, harga)
+            addMenuDataSource(token, nama_menu, jenis, deskripsi, gambar, harga)
             return addMenu
         }
     }
-    fun edtMenu(token: String, id_menu: String, nama_menu: String, jenis: String, deskripsi: String, gambar: String?, harga: String) : LiveData<MenuModel?> {
+    fun edtMenu(token: String, id_menu: Int, nama_menu: String, jenis: String, deskripsi: String, gambar: String?, harga: String) : LiveData<MenuModel?> {
         MenuRemoteDataSource.apply {
-            edtMenu(token, id_menu, nama_menu, jenis, deskripsi, gambar, harga)
+            updateMenuDataSource(token, id_menu, nama_menu, jenis, deskripsi, gambar, harga)
             return updateMenu
         }
     }
