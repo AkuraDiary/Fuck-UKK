@@ -1,6 +1,12 @@
 package com.readthefuckingmanual.fuckukk.ui.fragments.admin.menu
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +21,7 @@ import com.readthefuckingmanual.fuckukk.databinding.FragmentCrudMenuBinding
 import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,6 +92,67 @@ class FragmentCrudMenu : Fragment() {
         }
     }
 
+    // Handle the result of the gallery intent
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val imageUri = data.data
+            if (imageUri != null) {
+                // Load the image from the URI into a bitmap
+                val inputStream = requireContext().contentResolver.openInputStream(imageUri)
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+
+                // Convert the bitmap to a base64-encoded string
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+                val byteArray = byteArrayOutputStream.toByteArray()
+                val base64String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+                // Create the menu model with the image data
+                val menuModel = MenuModel(
+                    nama_menu = binding?.edtNamaMenu?.text.toString(),
+                    jenis = binding?.edtMenuType?.text.toString(),
+                    deskripsi =binding?.edtDescription?.text.toString(),
+                    harga = binding?.edtPrice?.text.toString(),
+                    filename = base64String,
+                    id_menu = null,
+                    path = null,
+                )
+
+                Log.d("ADD MENU", menuModel.toString())
+                if (!isedit) {
+                    MenuRepository.addMenu(userToken!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.filename, menuModel.harga, ).observe(viewLifecycleOwner){
+                        if (it != null){
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                (activity as AdminActivity).moveToAdminMenuFragment()
+                            }
+                        }
+                    }
+                } else {
+                    menuModel.apply {
+                        filename = MenuRepository.selectedmenu.value?.filename
+                        id_menu = MenuRepository.selectedmenu.value?.id_menu
+                        path = MenuRepository.selectedmenu.value?.path
+                    }
+                    MenuRepository.edtMenu(userToken!!,
+                        menuModel.id_menu!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path!!, menuModel.harga ).observe(viewLifecycleOwner){
+                        if (it != null){
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Menu Diedit ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                (activity as AdminActivity).moveToAdminMenuFragment()
+
+                            }
+
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
     fun setupButtonSave(){
         binding?.apply {
             btnMenuSave.setOnClickListener() {
@@ -101,6 +169,10 @@ class FragmentCrudMenu : Fragment() {
 
                 Log.d("ADD MENU", menuModel.toString())
                 if (!isedit) {
+
+//                    // Create an intent to pick an image from the gallery
+//                    val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//                    startActivityForResult(intent, GALLERY_REQUEST_CODE)
 
                     MenuRepository.addMenu(userToken!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path, menuModel.harga).observe(viewLifecycleOwner){
                         if (it != null){
@@ -149,6 +221,8 @@ class FragmentCrudMenu : Fragment() {
         @JvmStatic
         fun newInstance() =
             FragmentCrudMenu()
+
+        private const val GALLERY_REQUEST_CODE = 123
 
     }
 }
