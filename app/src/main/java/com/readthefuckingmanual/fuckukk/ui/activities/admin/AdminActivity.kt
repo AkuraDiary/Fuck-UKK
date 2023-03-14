@@ -2,6 +2,7 @@ package com.readthefuckingmanual.fuckukk.ui.activities.admin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.readthefuckingmanual.fuckukk.R
@@ -28,8 +29,12 @@ class AdminActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         setupNavigation()
+        binding?.bottomNavigationAdmin?.visibility = View.VISIBLE
+        observeNavigation()
+        moveToAdminTableFragment()
 
     }
+
 
     fun setupNavigation(){
         binding?.apply {
@@ -81,10 +86,27 @@ class AdminActivity : AppCompatActivity() {
     }
 
     fun moveToCrudMenuFragment() {
+
         changeFragment(fragmentCrudMenu)
     }
 
     fun moveToCrudTableFragment() {
         changeFragment(fragmentCrudTable)
     }
+
+    override fun onBackPressed() {
+        moveToAdminTableFragment()
+//        super.onBackPressed()
+    }
+
+    fun observeNavigation(){
+        supportFragmentManager.addFragmentOnAttachListener { fragmentManager, fragment ->
+            if (fragment is FragmentCrudTable || fragment is FragmentCrudMenu){
+                binding?.bottomNavigationAdmin?.visibility = View.GONE
+            }else{
+                binding?.bottomNavigationAdmin?.visibility = View.VISIBLE
+            }
+        }
+    }
+
 }
