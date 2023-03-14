@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.readthefuckingmanual.fuckukk.R
+import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.ActivityAdminBinding
 import com.readthefuckingmanual.fuckukk.ui.fragments.admin.menu.FragmentAdminMenu
@@ -95,6 +96,7 @@ class AdminActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+//        MenuRepository.selectedmenu.observe(view)
         moveToAdminTableFragment()
 //        super.onBackPressed()
     }

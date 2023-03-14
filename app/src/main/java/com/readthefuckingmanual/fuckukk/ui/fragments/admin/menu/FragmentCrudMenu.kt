@@ -71,6 +71,13 @@ class FragmentCrudMenu : Fragment() {
                         edtDescription.setText(it?.deskripsi)
                         edtPrice.setText(it?.harga)
                     }
+                }else{
+                    binding?.apply {
+                        edtNamaMenu.text.clear()
+                        edtMenuType.text.clear()
+                        edtDescription.text.clear()
+                        edtPrice.text.clear()
+                    }
                 }
 
             }
