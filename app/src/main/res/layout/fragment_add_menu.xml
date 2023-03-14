@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/edtCRUDMenu"
+            android:id="@+id/edtAddMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama Menu"
@@ -35,39 +35,39 @@
             tools:layout_editor_absoluteX="0dp" />
 
         <EditText
-            android:id="@+id/edtMenuType"
+            android:id="@+id/edtAddMenuType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Jenis Menu"
             android:layout_marginTop="16dp"
             android:inputType="text"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/edtCRUDMenu"
+            app:layout_constraintTop_toBottomOf="@+id/edtAddMenu"
             tools:layout_editor_absoluteX="0dp" />
 
         <EditText
-            android:id="@+id/edtDescription"
+            android:id="@+id/edtAddDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Deskripsi Menu"
             android:layout_marginTop="16dp"
             android:inputType="text"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/edtMenuType"
+            app:layout_constraintTop_toBottomOf="@+id/edtAddMenuType"
             tools:layout_editor_absoluteX="0dp" />
 
         <EditText
-            android:id="@+id/edtImage"
+            android:id="@+id/edtAddImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Gambar (Placeholder)"
             android:layout_marginTop="16dp"
             android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/edtAddDescription" />
 
         <EditText
-            android:id="@+id/edtPrice"
+            android:id="@+id/edtAddPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Harga Menu"
@@ -75,17 +75,15 @@
             android:inputType="text"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtImage" />
+            app:layout_constraintTop_toBottomOf="@+id/edtAddImage" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="90dp"
             android:text="Save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="-16dp" />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
