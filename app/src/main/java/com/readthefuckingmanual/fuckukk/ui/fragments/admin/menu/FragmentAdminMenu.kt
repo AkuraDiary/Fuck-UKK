@@ -15,6 +15,7 @@ import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.FragmentAdminMenuBinding
+import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
 import com.readthefuckingmanual.fuckukk.ui.activities.login.LoginActivity
 import com.readthefuckingmanual.fuckukk.ui.activities.main.MainActivity
 import com.readthefuckingmanual.fuckukk.ui.fragments.cashier.menu.FragmentMenu
@@ -60,7 +61,14 @@ class FragmentAdminMenu : Fragment() {
 
         setupRvMenu()
         setupBtnLogout()
+        setupFAB()
 
+    }
+
+    fun setupFAB() {
+        binding?.fabAddMenuAdmin?.setOnClickListener{
+            (activity as AdminActivity).moveToCrudMenuFragment()
+        }
     }
 
     fun setupBtnLogout() {

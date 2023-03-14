@@ -131,7 +131,7 @@ class FragmentCrudMenu : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             FragmentCrudMenu()
 
     }

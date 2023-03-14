@@ -8,6 +8,8 @@ import com.readthefuckingmanual.fuckukk.R
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.ActivityAdminBinding
 import com.readthefuckingmanual.fuckukk.ui.fragments.admin.menu.FragmentAdminMenu
+import com.readthefuckingmanual.fuckukk.ui.fragments.admin.menu.FragmentCrudMenu
+import com.readthefuckingmanual.fuckukk.ui.fragments.admin.table.FragmentCrudTable
 import com.readthefuckingmanual.fuckukk.ui.fragments.admin.table.FragmentTable
 import com.readthefuckingmanual.fuckukk.ui.fragments.admin.user.FragmentUser
 
@@ -17,6 +19,8 @@ class AdminActivity : AppCompatActivity() {
     private val userFragment = FragmentUser.newInstance()
     private val tableFragment = FragmentTable.newInstance()
     private val menuFragment = FragmentAdminMenu.newInstance()
+    private val fragmentCrudMenu = FragmentCrudMenu.newInstance()
+    private val fragmentCrudTable = FragmentCrudTable.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,5 +78,13 @@ class AdminActivity : AppCompatActivity() {
 
     fun moveToAdminMenuFragment() {
         changeFragment(menuFragment)
+    }
+
+    fun moveToCrudMenuFragment() {
+        changeFragment(fragmentCrudMenu)
+    }
+
+    fun moveToCrudTableFragment() {
+        changeFragment(fragmentCrudTable)
     }
 }
