@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.FragmentCrudMenuBinding
 import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
 import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,8 +82,13 @@ class FragmentCrudMenu : Fragment() {
                 if (isedit) {
                     MenuRepository.addMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
                         if (it != null){
-                            Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
-                            (activity as AdminActivity).moveToAdminMenuFragment()
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                (activity as AdminActivity).moveToAdminMenuFragment()
+
+                            }
+
+
                         }
 
                     }
@@ -92,8 +100,12 @@ class FragmentCrudMenu : Fragment() {
                     }
                     MenuRepository.edtMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
                         if (it != null){
-                            Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
-                            (activity as AdminActivity).moveToAdminMenuFragment()
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Menu Diedit ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                (activity as AdminActivity).moveToAdminMenuFragment()
+
+                            }
+
                         }
 
                     }
