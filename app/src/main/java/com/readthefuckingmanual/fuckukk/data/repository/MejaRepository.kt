@@ -1,11 +1,15 @@
 package com.readthefuckingmanual.fuckukk.data.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.readthefuckingmanual.fuckukk.data.model.meja.ListMejaResponse
 import com.readthefuckingmanual.fuckukk.data.model.meja.MejaModel
+import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MejaRemoteDataSource
+import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MenuRemoteDataSource
 
 object MejaRepository {
+
 
 //    private val _listMeja = MutableLiveData<ListMejaResponse?>()
 //    val listMeja get() = _listMeja
