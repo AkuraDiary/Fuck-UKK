@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.readthefuckingmanual.fuckukk.R
+import android.widget.Toast
+import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.FragmentCrudMenuBinding
-import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
 import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
 
 // TODO: Rename parameter arguments, choose names that match
@@ -58,8 +58,27 @@ class FragmentCrudMenu : Fragment() {
     }
 
     fun setupButtonSave(){
-        binding?.btnMenuSave?.setOnClickListener() {
-            MenuRepository.addMenu()
+        binding?.apply {
+            btnMenuSave?.setOnClickListener() {
+
+                val menuModel = MenuModel(
+                    nama_menu = edtNamaMenu.text.toString(),
+                    jenis = edtMenuType.text.toString(),
+                    deskripsi = edtDescription.text.toString(),
+                    harga = edtPrice.text.toString(),
+                    filename = "",
+                    id_menu = null,
+                    path = "",
+                )
+
+                MenuRepository.addMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
+                    if (it != null){
+                        Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                        (activity as AdminActivity).moveToAdminMenuFragment()
+                    }
+
+                }
+            }
         }
     }
     override fun onDestroyView() {
