@@ -108,7 +108,7 @@ class FragmentHistory : Fragment() {
                 var totalHarga = 0
                 //count total harga
                 for (i in detailTransaksi?.barang!!) {
-                    totalHarga += i.harga!!
+                    totalHarga += i.harga!!.toInt()
                 }
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                     dialogBinding.apply {

@@ -1,13 +1,12 @@
 package com.readthefuckingmanual.fuckukk.data.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.readthefuckingmanual.fuckukk.data.model.meja.ListMejaResponse
 import com.readthefuckingmanual.fuckukk.data.model.meja.MejaModel
 import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MejaRemoteDataSource
 
 object MejaRepository {
-
-    val meja : MutableLiveData<ArrayList<MejaModel>> = MutableLiveData(ArrayList())
 
 
 //    private val _listMeja = MutableLiveData<ListMejaResponse?>()

@@ -5,37 +5,119 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.readthefuckingmanual.fuckukk.R
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
+import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
+import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
+import com.readthefuckingmanual.fuckukk.databinding.FragmentCrudMenuBinding
+import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
+import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+//private const val ARG_PARAM1 = "param1"
+//private const val ARG_PARAM2 = "param2"
+
+
 
 /**
  * A simple [Fragment] subclass.
  * Use the [FragmentCrudMenu.newInstance] factory method to
  * create an instance of this fragment.
  */
+
 class FragmentCrudMenu : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var binding: FragmentCrudMenuBinding? = null
+    private var isedit = false
+    private val userPreference by lazy {
+        UserPreferences(requireContext())
+    }
+
+    private val userToken by lazy {
+        userPreference.getSession().token
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_crud_menu, container, false)
+        binding = FragmentCrudMenuBinding.inflate(layoutInflater, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeSelectedMenu()
+        setupButtonSave()
+    }
+
+    fun observeSelectedMenu(){
+        MenuRepository.selectedmenu.observe(viewLifecycleOwner){
+            isedit = it != null
+        }
+    }
+
+    fun setupButtonSave(){
+        binding?.apply {
+            btnMenuSave?.setOnClickListener() {
+
+                val menuModel = MenuModel(
+                    nama_menu = edtNamaMenu.text.toString(),
+                    jenis = edtMenuType.text.toString(),
+                    deskripsi = edtDescription.text.toString(),
+                    harga = edtPrice.text.toString(),
+                    filename = "",
+                    id_menu = null,
+                    path = "",
+                )
+                if (isedit) {
+                    MenuRepository.addMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
+                        if (it != null){
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                (activity as AdminActivity).moveToAdminMenuFragment()
+
+                            }
+
+
+                        }
+
+                    }
+                } else {
+                    menuModel.apply {
+                        filename = MenuRepository.selectedmenu.value?.filename
+                        id_menu = MenuRepository.selectedmenu.value?.id_menu
+                        path = MenuRepository.selectedmenu.value?.path
+                    }
+                    MenuRepository.edtMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
+                        if (it != null){
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Menu Diedit ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                (activity as AdminActivity).moveToAdminMenuFragment()
+
+                            }
+
+                        }
+
+                    }
+                }
+
+
+            }
+        }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     companion object {
@@ -50,11 +132,7 @@ class FragmentCrudMenu : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            FragmentCrudMenu().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+            FragmentCrudMenu()
+
     }
 }
