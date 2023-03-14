@@ -11,7 +11,7 @@ import com.readthefuckingmanual.fuckukk.databinding.FragmentAdminMenuBinding
 import com.readthefuckingmanual.fuckukk.databinding.ItemAdminMenuBinding
 
 class ListAdminMenuAdapter(
-//    private val observeSelectedMenu: () -> Unit
+    private val observeSelectedMenu: (MenuModel) -> Unit
 ) : RecyclerView.Adapter<ListAdminMenuAdapter.ListAdminMenuViewHolder>() {
 
     fun setData(data: List<MenuModel>) {
@@ -24,7 +24,7 @@ class ListAdminMenuAdapter(
 
     inner class ListAdminMenuViewHolder(
         private val binding: ItemAdminMenuBinding,
-//        private val observeSelectedMenu: () -> Unit
+        private val observeSelectedMenu: (MenuModel) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(adminMenuItem: MenuModel) {
@@ -33,6 +33,9 @@ class ListAdminMenuAdapter(
                 tvAdminDeskripsiMenu.text = adminMenuItem.deskripsi
                 tvAdminHargaMenu.text = adminMenuItem.harga.toString()
                 Glide.with(ivAdminGambarMenu).load(adminMenuItem.path).into(ivAdminGambarMenu)
+                root.setOnClickListener {
+                    observeSelectedMenu(adminMenuItem)
+                }
             }
         }
     }
@@ -40,7 +43,7 @@ class ListAdminMenuAdapter(
     private var adminMenuList: ArrayList<MenuModel> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListAdminMenuAdapter.ListAdminMenuViewHolder {
         val viewBinding = ItemAdminMenuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListAdminMenuViewHolder(viewBinding /*observeSelectedMenu*/)
+        return ListAdminMenuViewHolder(viewBinding , observeSelectedMenu)
     }
 
     override fun getItemCount(): Int {
