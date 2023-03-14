@@ -4,6 +4,7 @@ import com.readthefuckingmanual.fuckukk.data.model.meja.ListMejaResponse
 import com.readthefuckingmanual.fuckukk.data.model.meja.MejaModel
 import com.readthefuckingmanual.fuckukk.data.model.menu.ListMenuResponse
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
+import com.readthefuckingmanual.fuckukk.data.model.menu.UpdateMenuModel
 import com.readthefuckingmanual.fuckukk.data.source.remote.BasicResponse
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.DetailTransaksiModel
 import com.readthefuckingmanual.fuckukk.data.model.transaksi.ListTransaksiResponse
@@ -66,7 +67,7 @@ interface ClientApiService {
         @Field("deskripsi") deskripsi : String,
         //@Field("gambar") gambar : String?,
         @Field("harga") harga : String
-    ): Call<BasicResponse>
+    ): Call<UpdateMenuModel>
 
     /* delete menu */
     @DELETE("menu/{id_menu}")

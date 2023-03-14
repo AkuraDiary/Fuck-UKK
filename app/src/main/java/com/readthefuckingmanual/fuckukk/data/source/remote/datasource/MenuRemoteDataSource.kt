@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.readthefuckingmanual.fuckukk.data.model.menu.ListMenuResponse
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
+import com.readthefuckingmanual.fuckukk.data.model.menu.UpdateMenuModel
 import com.readthefuckingmanual.fuckukk.data.source.remote.BasicResponse
 import com.readthefuckingmanual.fuckukk.data.source.remote.retrofit.RetrofitConfig
 import retrofit2.Call
@@ -21,8 +22,8 @@ object MenuRemoteDataSource {
     private val _menuModel : MutableLiveData<MenuModel?> = MutableLiveData()
     val _menu : LiveData<MenuModel?> = _menuModel
 
-    private val _updateMenu : MutableLiveData<MenuModel?> = MutableLiveData()
-    val updateMenu : MutableLiveData<MenuModel?> = _updateMenu
+    private val _updateMenu : MutableLiveData<UpdateMenuModel?> = MutableLiveData()
+    val updateMenu : MutableLiveData<UpdateMenuModel?> = _updateMenu
 
     private val _addMenu : MutableLiveData<MenuModel?> = MutableLiveData()
     val addMenu : MutableLiveData<MenuModel?> = _addMenu
@@ -114,17 +115,17 @@ object MenuRemoteDataSource {
         RetrofitConfig.ApiService.updateMenu("Bearer $token", id_menu, nama_menu, jenis, deskripsi,  //gambar,
             harga
         ).enqueue(
-            object : Callback<BasicResponse?> {
+            object : Callback<UpdateMenuModel?> {
                 override fun onResponse(
-                    call: Call<BasicResponse?>,
-                    response: Response<BasicResponse?>
+                    call: Call<UpdateMenuModel?>,
+                    response: Response<UpdateMenuModel?>
                 ) {
                     if (response.isSuccessful){
-                        _messages.value = response.body()
+                        _updateMenu.value = response.body()
                     }
                 }
 
-                override fun onFailure(call: Call<BasicResponse?>, t: Throwable) {
+                override fun onFailure(call: Call<UpdateMenuModel?>, t: Throwable) {
                     //_listMenu?.postValue(null)
                     Log.d("MenuRemoteDataSource", "onFailure: ${t.message}")
                 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.readthefuckingmanual.fuckukk.data.model.menu.ListMenuResponse
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
+import com.readthefuckingmanual.fuckukk.data.model.menu.UpdateMenuModel
 import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MenuRemoteDataSource
 
 object MenuRepository {
@@ -55,7 +56,7 @@ object MenuRepository {
             return addMenu
         }
     }
-    fun edtMenu(token: String, id_menu: Int, nama_menu: String, jenis: String, deskripsi: String, gambar: String?, harga: String) : LiveData<MenuModel?> {
+    fun edtMenu(token: String, id_menu: Int, nama_menu: String, jenis: String, deskripsi: String, gambar: String?, harga: String) : LiveData<UpdateMenuModel?> {
         MenuRemoteDataSource.apply {
             updateMenuDataSource(token, id_menu, nama_menu, jenis, deskripsi, gambar, harga)
             return updateMenu
