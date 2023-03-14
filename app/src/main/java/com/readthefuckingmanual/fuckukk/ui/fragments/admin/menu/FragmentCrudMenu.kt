@@ -28,7 +28,7 @@ import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
 class FragmentCrudMenu : Fragment() {
 
     private var binding: FragmentCrudMenuBinding? = null
-
+    private var isedit = false
     private val userPreference by lazy {
         UserPreferences(requireContext())
     }
@@ -36,8 +36,6 @@ class FragmentCrudMenu : Fragment() {
     private val userToken by lazy {
         userPreference.getSession().token
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +52,17 @@ class FragmentCrudMenu : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        observeSelectedMenu()
     }
 
+    fun observeSelectedMenu(){
+        MenuRepository.selectedmenu.observe(viewLifecycleOwner){
+            isedit = it != null
+        }
+    }
     fun setupButtonSave(){
         binding?.btnMenuSave?.setOnClickListener() {
-            MenuRepository.addMenu()
+//            MenuRepository.addMenu()
         }
     }
     override fun onDestroyView() {
