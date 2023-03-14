@@ -7,6 +7,9 @@ import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MejaRemote
 
 object MejaRepository {
 
+    val meja : MutableLiveData<ArrayList<MejaModel>> = MutableLiveData(ArrayList())
+
+
 //    private val _listMeja = MutableLiveData<ListMejaResponse?>()
 //    val listMeja get() = _listMeja
 //
