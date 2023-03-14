@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
@@ -37,7 +38,7 @@ class FragmentAdminMenu : Fragment() {
     private var menu: List<MenuModel?>? = listOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rvAdminMenuAdaper = ListAdminMenuAdapter() //{ observeSelectedAdminMenu() }
+        rvAdminMenuAdaper = ListAdminMenuAdapter {::observeSelectedMenuAdmin }
     }
 
     override fun onCreateView(
@@ -56,6 +57,9 @@ class FragmentAdminMenu : Fragment() {
                 rvAdminMenuAdaper?.setData(it.values as List<MenuModel>)
             }
         }
+
+        setupRvMenu()
+        setupBtnLogout()
 
     }
 
@@ -83,24 +87,13 @@ class FragmentAdminMenu : Fragment() {
 
     }
 
-//    fun observeSelectedMenuAdmin() {
-//        MenuRepository..observe(viewLifecycleOwner) { it ->
-//            Log.d("FragmentMenu", "observeSelectedMenu: ${it.size}")
-//            binding?.apply {
-//                Log.d("FragmentMenu", "btnCheckout visibility: ${btnCheckout.visibility}")
-//                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-//                    if (it.isNotEmpty()) {
-//                        btnCheckout.visibility = View.VISIBLE
-//                    } else {
-//                        btnCheckout.visibility = View.GONE
-//                    }
-//                    btnCheckout.text = "Checkout (${it.size}) Item"
-//
-//                }
-//
+    fun observeSelectedMenuAdmin(menuModel : MenuModel) {
+        MenuRepository.selectedmenu.postValue(menuModel)
+//        MenuRepository.selectedmenu.observe(viewLifecycleOwner) {
+//            it = menuModel
 //            }
-//        }
-//    }
+        }
+
 
     companion object {
         @JvmStatic
