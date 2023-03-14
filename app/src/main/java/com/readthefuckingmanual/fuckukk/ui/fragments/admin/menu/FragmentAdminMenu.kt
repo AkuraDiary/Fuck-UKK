@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.readthefuckingmanual.fuckukk.R
@@ -39,7 +40,7 @@ class FragmentAdminMenu : Fragment() {
     private var menu: List<MenuModel?>? = listOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rvAdminMenuAdaper = ListAdminMenuAdapter {::observeSelectedMenuAdmin }
+        rvAdminMenuAdaper = ListAdminMenuAdapter {menuModel: MenuModel ->  observeSelectedMenuAdmin(menuModel) }
     }
 
     override fun onCreateView(
@@ -96,7 +97,19 @@ class FragmentAdminMenu : Fragment() {
     }
 
     fun observeSelectedMenuAdmin(menuModel : MenuModel) {
-        MenuRepository.selectedmenu.postValue(menuModel)
+        MenuRepository.selectedmenu.apply {
+            postValue(menuModel)
+            observe(viewLifecycleOwner){
+                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
+                    Toast.makeText(requireContext(), "Menu Clicked ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                    if (it != null){
+
+                        (activity as AdminActivity).moveToCrudMenuFragment()
+                    }
+                }
+        }
+        }
+
 //        MenuRepository.selectedmenu.observe(viewLifecycleOwner) {
 //            it = menuModel
 //            }

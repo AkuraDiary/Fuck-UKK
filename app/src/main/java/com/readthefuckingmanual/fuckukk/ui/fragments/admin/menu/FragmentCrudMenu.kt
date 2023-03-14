@@ -62,7 +62,19 @@ class FragmentCrudMenu : Fragment() {
 
     fun observeSelectedMenu(){
         MenuRepository.selectedmenu.observe(viewLifecycleOwner){
-            isedit = it != null
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
+                isedit = it != null
+                if (isedit){
+                    binding?.apply {
+                        edtNamaMenu.setText(it?.nama_menu)
+                        edtMenuType.setText(it?.jenis)
+                        edtDescription.setText(it?.deskripsi)
+                        edtPrice.setText(it?.harga)
+                    }
+                }
+
+            }
+
         }
     }
 
@@ -118,6 +130,7 @@ class FragmentCrudMenu : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+        MenuRepository.selectedmenu.postValue(null)
     }
 
     companion object {

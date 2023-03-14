@@ -3,6 +3,7 @@ package com.readthefuckingmanual.fuckukk.ui.fragments.admin.menu
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
@@ -33,6 +34,7 @@ class ListAdminMenuAdapter(
                 tvAdminDeskripsiMenu.text = adminMenuItem.deskripsi
                 tvAdminHargaMenu.text = adminMenuItem.harga.toString()
                 Glide.with(ivAdminGambarMenu).load(adminMenuItem.path).into(ivAdminGambarMenu)
+
                 root.setOnClickListener {
                     observeSelectedMenu(adminMenuItem)
                 }
