@@ -52,5 +52,11 @@ object MenuRepository {
             return _menu
         }
     }
+    fun edtMenu(token: String, menuModel: MenuModel) : LiveData<MenuModel?> {
+        MenuRemoteDataSource.apply {
+            edtMenu(token, menuModel)
+            return _menu
+        }
+    }
 
 }

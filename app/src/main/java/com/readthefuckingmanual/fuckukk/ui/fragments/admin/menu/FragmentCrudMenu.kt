@@ -54,6 +54,7 @@ class FragmentCrudMenu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeSelectedMenu()
+        setupButtonSave()
     }
 
     fun observeSelectedMenu(){
@@ -75,14 +76,30 @@ class FragmentCrudMenu : Fragment() {
                     id_menu = null,
                     path = "",
                 )
+                if (isedit) {
+                    MenuRepository.addMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
+                        if (it != null){
+                            Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                            (activity as AdminActivity).moveToAdminMenuFragment()
+                        }
 
-                MenuRepository.addMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
-                    if (it != null){
-                        Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
-                        (activity as AdminActivity).moveToAdminMenuFragment()
                     }
+                } else {
+                    menuModel.apply {
+                        filename = MenuRepository.selectedmenu.value?.filename
+                        id_menu = MenuRepository.selectedmenu.value?.id_menu
+                        path = MenuRepository.selectedmenu.value?.path
+                    }
+                    MenuRepository.edtMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
+                        if (it != null){
+                            Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                            (activity as AdminActivity).moveToAdminMenuFragment()
+                        }
 
+                    }
                 }
+
+
             }
         }
     }
