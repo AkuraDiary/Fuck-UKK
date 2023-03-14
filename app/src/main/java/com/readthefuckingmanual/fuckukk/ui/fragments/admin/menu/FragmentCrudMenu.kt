@@ -11,7 +11,6 @@ import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.data.repository.MenuRepository
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
 import com.readthefuckingmanual.fuckukk.databinding.FragmentCrudMenuBinding
-import com.readthefuckingmanual.fuckukk.databinding.FragmentMenuBinding
 import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -99,31 +98,33 @@ class FragmentCrudMenu : Fragment() {
                     path = "",
                 )
                 if (isedit) {
-//                    MenuRepository.addMenu(userToken!!, nama_menu = ,  ).observe(viewLifecycleOwner){
-//                        if (it != null){
-//                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-//                                Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
-//                                (activity as AdminActivity).moveToAdminMenuFragment()
-//                            }
-//                        }
-//                    }
+                    menuModel.id_menu?.let { menu ->
+                        MenuRepository.edtMenu(userToken!!, menuModel.id_menu!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path, menuModel.path!!).observe(viewLifecycleOwner){
+                            if (it != null){
+                                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                    Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                    (activity as AdminActivity).moveToAdminMenuFragment()
+                                }
+                            }
+                        }
+                    }
                 } else {
-//                    menuModel.apply {
-//                        filename = MenuRepository.selectedmenu.value?.filename
-//                        id_menu = MenuRepository.selectedmenu.value?.id_menu
-//                        path = MenuRepository.selectedmenu.value?.path
-//                    }
-//                    MenuRepository.edtMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
-//                        if (it != null){
-//                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-//                                Toast.makeText(requireContext(), "Menu Diedit ${it?.nama_menu}", Toast.LENGTH_SHORT)
-//                                (activity as AdminActivity).moveToAdminMenuFragment()
-//
-//                            }
-//
-//                        }
-//
-//                    }
+                    menuModel.apply {
+                        filename = MenuRepository.selectedmenu.value?.filename
+                        id_menu = MenuRepository.selectedmenu.value?.id_menu
+                        path = MenuRepository.selectedmenu.value?.path
+                    }
+                    MenuRepository.edtMenu(userToken!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path!! ).observe(viewLifecycleOwner){
+                        if (it != null){
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Menu Diedit ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                (activity as AdminActivity).moveToAdminMenuFragment()
+
+                            }
+
+                        }
+
+                    }
                 }
 
 
@@ -141,15 +142,6 @@ class FragmentCrudMenu : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentCrudMenu.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
             FragmentCrudMenu()

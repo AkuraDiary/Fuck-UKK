@@ -3,11 +3,9 @@ package com.readthefuckingmanual.fuckukk.data.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.RecyclerView
 import com.readthefuckingmanual.fuckukk.data.model.menu.ListMenuResponse
 import com.readthefuckingmanual.fuckukk.data.model.menu.MenuModel
 import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MenuRemoteDataSource
-import com.readthefuckingmanual.fuckukk.data.source.remote.retrofit.RetrofitConfig
 
 object MenuRepository {
     // implements the methods from the MenuDataSources
@@ -53,7 +51,7 @@ object MenuRepository {
             return addMenu
         }
     }
-    fun edtMenu(token: String, id_menu: Int, nama_menu : String, jenis : String, deskripsi : String, gambar : String?, harga : String) : LiveData<MenuModel?> {
+    fun edtMenu(token: String, id_menu: String, nama_menu: String, jenis: String, deskripsi: String, gambar: String?, harga: String) : LiveData<MenuModel?> {
         MenuRemoteDataSource.apply {
             edtMenu(token, id_menu, nama_menu, jenis, deskripsi, gambar, harga)
             return updateMenu
