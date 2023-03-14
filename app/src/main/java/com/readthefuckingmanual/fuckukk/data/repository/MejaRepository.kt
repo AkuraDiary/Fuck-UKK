@@ -14,7 +14,9 @@ object MejaRepository {
 //        val mejaList = MutableLiveData<ListMejaResponse?>()
 //        MejaRemoteDataSource.apply {
 //            getListMeja(token)
-//            _listMeja.value = mejaList.value
+//            _listMeja.
+//
+//            value = mejaList.value
 //        }
 //    }
 }
