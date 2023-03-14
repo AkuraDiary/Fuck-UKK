@@ -39,9 +39,9 @@ class FragmentCrudTable : Fragment() {
     private fun observeAddMeja() {
         binding?.apply {
             btnAddMeja.setOnClickListener {
-            if (edtMeja.text.isNotEmpty()){
+            if (editNamaMeja.text.isNotEmpty()){
                 MejaRemoteDataSource.apply {
-                    addMeja(userToken.toString(), edtMeja.text.toString())
+                    addMeja(userToken.toString(), editNamaMeja.text.toString())
                     mejaResponse.observe(viewLifecycleOwner){
                         if(it?.status == "Success"){
                             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
