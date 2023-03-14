@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.readthefuckingmanual.fuckukk.R
 import com.readthefuckingmanual.fuckukk.data.model.meja.MejaModel
 import com.readthefuckingmanual.fuckukk.data.source.preferences.UserPreferences
+import com.readthefuckingmanual.fuckukk.data.source.remote.datasource.MejaRemoteDataSource
 import com.readthefuckingmanual.fuckukk.databinding.FragmentTableBinding
 import com.readthefuckingmanual.fuckukk.ui.activities.admin.AdminActivity
 import com.readthefuckingmanual.fuckukk.ui.activities.login.LoginActivity
@@ -33,6 +34,7 @@ class FragmentTable : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         rvAdminTableAdapter = ListTableAdapter()
+        MejaRemoteDataSource.getListMeja(userToken!!)
     }
 
     override fun onCreateView(
@@ -46,6 +48,12 @@ class FragmentTable : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        MejaRemoteDataSource.mejaList.observe(viewLifecycleOwner){
+            if(it != null){
+                rvAdminTableAdapter?.setData(it.values as List<MejaModel>)
+            }
+        }
         setupRvMeja()
         setupBtnLogout()
         setupFAB()
