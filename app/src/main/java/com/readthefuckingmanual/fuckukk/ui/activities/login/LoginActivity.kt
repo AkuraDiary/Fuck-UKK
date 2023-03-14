@@ -36,7 +36,12 @@ class LoginActivity : AppCompatActivity() {
                 ).observe(this){
                     if (it != null){
                         userPreferences.saveSession(it)
-                        moveToAdminActivity()
+                        if (it.role == "admin"){
+                            moveToAdminActivity()
+                        }else{
+                            moveToMainActivity()
+                        }
+
                     }
                 }
             }
