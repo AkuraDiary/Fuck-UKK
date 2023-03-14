@@ -5,48 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ui.fragments.admin.menu.FragmentCrudMenu">
+    tools:context=".ui.fragments.admin.menu.FragmentAddMenu">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvAddMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="648dp"
             android:text="Add Menu"
+            android:layout_marginTop="32dp"
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/edtCRUDMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-
             android:hint="Nama Menu"
+            android:layout_marginTop="32dp"
             android:inputType="text"
             android:padding="16dp"
-
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddMenu"
             tools:layout_editor_absoluteX="0dp" />
 
         <EditText
             android:id="@+id/edtMenuType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="40dp"
             android:hint="Jenis Menu"
-
+            android:layout_marginTop="16dp"
             android:inputType="text"
-
             android:padding="16dp"
             app:layout_constraintTop_toBottomOf="@+id/edtCRUDMenu"
             tools:layout_editor_absoluteX="0dp" />
@@ -55,8 +49,8 @@
             android:id="@+id/edtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:hint="Deskripsi Menu"
+            android:layout_marginTop="16dp"
             android:inputType="text"
             android:padding="16dp"
             app:layout_constraintTop_toBottomOf="@+id/edtMenuType"
@@ -66,11 +60,8 @@
             android:id="@+id/edtImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="40dp"
             android:hint="Gambar (Placeholder)"
-
-            android:inputType=""
+            android:layout_marginTop="16dp"
             android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtDescription" />
@@ -80,8 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Harga Menu"
+            android:layout_marginTop="16dp"
             android:inputType="text"
-            android:layout_marginTop="40dp"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -97,6 +88,5 @@
             tools:layout_editor_absoluteX="-16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </FrameLayout>
