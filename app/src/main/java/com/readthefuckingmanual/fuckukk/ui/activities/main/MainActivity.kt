@@ -51,17 +51,17 @@ class MainActivity : AppCompatActivity() {
 
     fun setupNavigation(){
         binding?.apply {
-            bottomNavigation?.setOnItemSelectedListener { menu ->
+            bottomNavigation.setOnItemSelectedListener { menu ->
                 when (menu.itemId) {
                     R.id.nav_menu -> {
                         changeFragment(menuFragment)
 
-//                    binding?.tvJudul?.text = "Jadwal Piala Dunia"
+        //                    binding?.tvJudul?.text = "Jadwal Piala Dunia"
                         return@setOnItemSelectedListener true
                     }
                     R.id.nav_history -> {
                         changeFragment(historyFragment)
-//                    binding?.tvJudul?.text = "Hasil Piala Dunia"
+        //                    binding?.tvJudul?.text = "Hasil Piala Dunia"
                         return@setOnItemSelectedListener true
                     }
                 }

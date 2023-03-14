@@ -1,6 +1,7 @@
 package com.readthefuckingmanual.fuckukk.ui.fragments.admin.menu
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -86,27 +87,29 @@ class FragmentCrudMenu : Fragment() {
 
     fun setupButtonSave(){
         binding?.apply {
-            btnMenuSave?.setOnClickListener() {
+            btnMenuSave.setOnClickListener() {
 
                 val menuModel = MenuModel(
                     nama_menu = edtNamaMenu.text.toString(),
                     jenis = edtMenuType.text.toString(),
                     deskripsi = edtDescription.text.toString(),
                     harga = edtPrice.text.toString(),
-                    filename = "",
+                    filename = null,
                     id_menu = null,
-                    path = "",
+                    path = null,
                 )
+
+                Log.d("ADD MENU", menuModel.toString())
                 if (!isedit) {
-                    menuModel.id_menu?.let { menu ->
-                        MenuRepository.addMenu(userToken!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path!!, menuModel.harga!!).observe(viewLifecycleOwner){
-                            if (it != null){
-                                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                                    Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
-                                    (activity as AdminActivity).moveToAdminMenuFragment()
-                                }
+
+                    MenuRepository.addMenu(userToken!!, menuModel.nama_menu!!, menuModel.jenis!!, menuModel.deskripsi!!, menuModel.path, menuModel.harga).observe(viewLifecycleOwner){
+                        if (it != null){
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+                                (activity as AdminActivity).moveToAdminMenuFragment()
                             }
                         }
+
                     }
                 } else {
                     menuModel.apply {

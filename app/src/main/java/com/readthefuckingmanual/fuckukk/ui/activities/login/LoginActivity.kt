@@ -19,7 +19,12 @@ class LoginActivity : AppCompatActivity() {
 
 //         check logged in user
         if (!(userPreferences.getSession()).token.isNullOrEmpty()){
+            if(userPreferences.getSession().role == "admin"){
                 moveToAdminActivity()
+            }else{
+                moveToMainActivity()
+            }
+
         }
         setupInput()
 

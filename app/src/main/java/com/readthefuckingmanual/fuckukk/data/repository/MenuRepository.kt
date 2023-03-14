@@ -46,8 +46,12 @@ object MenuRepository {
     }
 
     fun addMenu(token: String, nama_menu : String, jenis : String, deskripsi : String, gambar : String?, harga : String ) : MutableLiveData<MenuModel?> {
+        Log.d("ADD MENU REPOSITORY", "IS CALLED")
         MenuRemoteDataSource.apply {
-            addMenuDataSource(token, nama_menu, jenis, deskripsi, gambar, harga)
+            addMenuDataSource(token,
+                nama_menu,
+                deskripsi,
+                jenis,  gambar, harga)
             return addMenu
         }
     }
