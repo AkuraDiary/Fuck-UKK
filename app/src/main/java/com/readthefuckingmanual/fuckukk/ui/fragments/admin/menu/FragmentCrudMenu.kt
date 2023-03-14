@@ -99,35 +99,31 @@ class FragmentCrudMenu : Fragment() {
                     path = "",
                 )
                 if (isedit) {
-                    MenuRepository.addMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
-                        if (it != null){
-                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                                Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
-                                (activity as AdminActivity).moveToAdminMenuFragment()
-
-                            }
-
-
-                        }
-
-                    }
+//                    MenuRepository.addMenu(userToken!!, nama_menu = ,  ).observe(viewLifecycleOwner){
+//                        if (it != null){
+//                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+//                                Toast.makeText(requireContext(), "Menu Ditambahkan ${it?.nama_menu}", Toast.LENGTH_SHORT)
+//                                (activity as AdminActivity).moveToAdminMenuFragment()
+//                            }
+//                        }
+//                    }
                 } else {
-                    menuModel.apply {
-                        filename = MenuRepository.selectedmenu.value?.filename
-                        id_menu = MenuRepository.selectedmenu.value?.id_menu
-                        path = MenuRepository.selectedmenu.value?.path
-                    }
-                    MenuRepository.edtMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
-                        if (it != null){
-                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                                Toast.makeText(requireContext(), "Menu Diedit ${it?.nama_menu}", Toast.LENGTH_SHORT)
-                                (activity as AdminActivity).moveToAdminMenuFragment()
-
-                            }
-
-                        }
-
-                    }
+//                    menuModel.apply {
+//                        filename = MenuRepository.selectedmenu.value?.filename
+//                        id_menu = MenuRepository.selectedmenu.value?.id_menu
+//                        path = MenuRepository.selectedmenu.value?.path
+//                    }
+//                    MenuRepository.edtMenu(userToken!!, menuModel).observe(viewLifecycleOwner){
+//                        if (it != null){
+//                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+//                                Toast.makeText(requireContext(), "Menu Diedit ${it?.nama_menu}", Toast.LENGTH_SHORT)
+//                                (activity as AdminActivity).moveToAdminMenuFragment()
+//
+//                            }
+//
+//                        }
+//
+//                    }
                 }
 
 
@@ -138,6 +134,10 @@ class FragmentCrudMenu : Fragment() {
         super.onDestroyView()
         binding = null
         MenuRepository.selectedmenu.postValue(null)
+    }
+
+    fun deleteMenu(){
+
     }
 
     companion object {

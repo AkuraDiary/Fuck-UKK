@@ -1,6 +1,7 @@
 package com.readthefuckingmanual.fuckukk.data.source.remote.datasource
 
 import android.util.Log
+import android.view.Menu
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.readthefuckingmanual.fuckukk.data.model.menu.ListMenuResponse
@@ -20,6 +21,12 @@ object MenuRemoteDataSource {
 
     private val _menuModel : MutableLiveData<MenuModel?> = MutableLiveData()
     val _menu : LiveData<MenuModel?> = _menuModel
+
+    private val _updateMenu : MutableLiveData<MenuModel?> = MutableLiveData()
+    val updateMenu : MutableLiveData<MenuModel?> = _updateMenu
+
+    private val _addMenu : MutableLiveData<MenuModel?> = MutableLiveData()
+    val addMenu : MutableLiveData<MenuModel?> = _addMenu
 
     private val _messages : MutableLiveData<BasicResponse?> = MutableLiveData()
     val messages : LiveData<BasicResponse?> = _messages
@@ -63,8 +70,8 @@ object MenuRemoteDataSource {
         )
     }
 
-    fun addMenu(token : String, nama_menu : String, harga : Int, kategori : String, gambar : String?) {
-        RetrofitConfig.ApiService.addMenu("Bearer $token", nama_menu, harga.toString(), kategori, gambar).enqueue(
+    fun addMenu(token : String, nama_menu : String, deskripsi: String, kategori : String, gambar : String?, harga : Int) {
+        RetrofitConfig.ApiService.addMenu("Bearer $token", nama_menu , kategori, deskripsi, gambar, harga.toString()).enqueue(
             object : Callback<MenuModel?> {
                 override fun onResponse(
                     call: Call<MenuModel?>,
@@ -103,8 +110,8 @@ object MenuRemoteDataSource {
         )
     }
 
-    fun updateMenu(token : String, id_menu : Int, nama_menu : String, harga : Int, kategori : String, gambar : String?) {
-        RetrofitConfig.ApiService.updateMenu("Bearer $token", id_menu, nama_menu, harga, kategori, gambar).enqueue(
+    fun updateMenu(token : String, id_menu : Int, nama_menu : String, jenis : String, deskripsi: String, gambar : String?, harga : Int) {
+        RetrofitConfig.ApiService.updateMenu("Bearer $token", id_menu, nama_menu, jenis, deskripsi,  gambar, harga.toString()).enqueue(
             object : Callback<BasicResponse?> {
                 override fun onResponse(
                     call: Call<BasicResponse?>,

@@ -49,9 +49,10 @@ interface ClientApiService {
     fun addMenu(
         @Header("Authorization") bearerToken : String,
         @Field("nama_menu") nama_menu : String,
-        @Field("harga") harga : String,
-        @Field("kategori") kategori : String,
-        @Field("gambar") gambar : String?
+        @Field("jenis") jenis : String,
+        @Field("deskripsi") deskripsi : String,
+        @Field("gambar") gambar : String?,
+        @Field("harga") harga : String
     ): Call<MenuModel>
 
     /* update menu */
@@ -60,10 +61,11 @@ interface ClientApiService {
     fun updateMenu(
         @Header("Authorization") bearerToken : String,
         @Path("id_menu") id_menu : Int,
-        @Field("nama_menu") nama_menu : String?,
-        @Field("harga") harga : Int?,
-        @Field("kategori") kategori : String?,
-        @Field("gambar") gambar : String?
+        @Field("nama_menu") nama_menu : String,
+        @Field("jenis") jenis : String,
+        @Field("deskripsi") deskripsi : String,
+        @Field("gambar") gambar : String?,
+        @Field("harga") harga : String
     ): Call<BasicResponse>
 
     /* delete menu */

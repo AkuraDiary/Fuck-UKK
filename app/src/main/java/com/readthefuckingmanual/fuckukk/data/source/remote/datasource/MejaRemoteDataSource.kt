@@ -38,7 +38,7 @@ object MejaRemoteDataSource {
     }
 
     fun addMeja(token : String, nomeja: String)  {
-       RetrofitConfig.ApiService.addMeja(token, nomeja).enqueue( object :Callback<BasicResponse?> {
+       RetrofitConfig.ApiService.addMeja("Bearer $token", nomeja).enqueue( object :Callback<BasicResponse?> {
            override fun onResponse(call: Call<BasicResponse?>, response: Response<BasicResponse?>) {
                if (response.isSuccessful){
                    _addmejarespons.value = response.body()
