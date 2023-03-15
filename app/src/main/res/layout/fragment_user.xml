@@ -15,6 +15,7 @@
             android:id="@+id/searchBarUserAdmin"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:background="@drawable/search_background"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="16dp"

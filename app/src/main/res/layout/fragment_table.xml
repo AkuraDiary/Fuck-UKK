@@ -8,6 +8,7 @@
     tools:context=".ui.fragments.admin.table.FragmentTable">
 
     <EditText
+        android:visibility="gone"
         android:id="@+id/searchBarTableAdmin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"

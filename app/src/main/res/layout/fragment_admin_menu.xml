@@ -8,6 +8,7 @@
     tools:context=".ui.fragments.admin.menu.FragmentAdminMenu">
 
     <EditText
+        android:visibility="gone"
         android:id="@+id/searchBarMenuAdmin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
