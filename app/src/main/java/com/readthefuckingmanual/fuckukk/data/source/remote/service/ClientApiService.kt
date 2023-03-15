@@ -54,7 +54,7 @@ interface ClientApiService {
         @Field("deskripsi") deskripsi : String,
         @Field("gambar") gambar : String?,
         @Field("harga") harga : String
-    ): Call<MenuModel>
+    ): Call<UpdateMenuModel>
 
     /* update menu */
     @FormUrlEncoded

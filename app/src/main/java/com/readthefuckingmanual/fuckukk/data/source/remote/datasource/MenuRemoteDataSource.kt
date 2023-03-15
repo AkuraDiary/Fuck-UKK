@@ -25,8 +25,8 @@ object MenuRemoteDataSource {
     private val _updateMenu : MutableLiveData<UpdateMenuModel?> = MutableLiveData()
     val updateMenu : MutableLiveData<UpdateMenuModel?> = _updateMenu
 
-    private val _addMenu : MutableLiveData<MenuModel?> = MutableLiveData()
-    val addMenu : MutableLiveData<MenuModel?> = _addMenu
+    private val _addMenu : MutableLiveData<UpdateMenuModel?> = MutableLiveData()
+    val addMenu : MutableLiveData<UpdateMenuModel?> = _addMenu
 
     private val _messages : MutableLiveData<BasicResponse?> = MutableLiveData()
     val messages : LiveData<BasicResponse?> = _messages
@@ -73,17 +73,17 @@ object MenuRemoteDataSource {
     fun addMenuDataSource(token: String, nama_menu: String, deskripsi: String, kategori: String, gambar: String?, harga: String) {
         Log.d("ADD MENU DATA SOURCE", "IS CALLED")
         RetrofitConfig.ApiService.addMenu("Bearer $token", nama_menu , kategori, deskripsi, gambar, harga).enqueue(
-            object : Callback<MenuModel?> {
+            object : Callback<UpdateMenuModel?> {
                 override fun onResponse(
-                    call: Call<MenuModel?>,
-                    response: Response<MenuModel?>
+                    call: Call<UpdateMenuModel?>,
+                    response: Response<UpdateMenuModel?>
                 ) {
                     if (response.isSuccessful){
-                        _menuModel.value = response.body()
+                        _addMenu.value = response.body()
                     }
                 }
 
-                override fun onFailure(call: Call<MenuModel?>, t: Throwable) {
+                override fun onFailure(call: Call<UpdateMenuModel?>, t: Throwable) {
                     //_listMenu?.postValue(null)
                     Log.d("MenuRemoteDataSource", "onFailure: ${t.message}")
                 }
