@@ -37,7 +37,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBarTableAdmin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogoutMejaAdmin"
         tools:listitem="@layout/item_admin_table" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
